@@ -1,14 +1,109 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Parameter \\#1 \\$node of method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\:\\:append\\(\\) expects Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeDefinition, Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeParentInterface\\|null given\\.$#"
+			message: "#^Call to method arrayNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\>\\.$#"
+			count: 1
+			path: packages/application/DependencyInjection/SystemMonitoringIntegration.php
+
+		-
+			message: "#^Class Symfony\\\\Component\\\\Messenger\\\\Transport\\\\InMemoryTransport not found\\.$#"
+			count: 1
+			path: packages/application/SystemMonitoring/Bridge/Symfony/Messenger/MessengerStatusProvider.php
+
+		-
+			message: "#^Call to method ifTrue\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ExprBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\>\\.$#"
+			count: 1
+			path: packages/aws-tool-kit/DependencyInjection/AwsToolKitIntegration.php
+
+		-
+			message: "#^Call to method booleanNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\>\\.$#"
+			count: 1
+			path: packages/console/DependencyInjection/ConsoleIntegration.php
+
+		-
+			message: "#^Call to method append\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\>\\.$#"
+			count: 1
+			path: packages/doctrine-extra/DependencyInjection/DoctrineExtraIntegration.php
+
+		-
+			message: "#^Call to method scalarNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\>\\.$#"
+			count: 1
+			path: packages/entity-migrator/DependencyInjection/EntityMigratorIntegration.php
+
+		-
+			message: "#^Call to method scalarNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\>\\.$#"
+			count: 1
+			path: packages/framework-extra-bundle/DependencyInjection/Configuration.php
+
+		-
+			message: "#^Call to method arrayNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\>\\.$#"
 			count: 1
 			path: packages/log/DependencyInjection/LogIntegration.php
+
+		-
+			message: "#^Call to method scalarNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\>\\.$#"
+			count: 2
+			path: packages/log/DependencyInjection/LogIntegration.php
+
+		-
+			message: "#^Call to method arrayNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\>\\.$#"
+			count: 1
+			path: packages/mailer/DependencyInjection/MailerIntegration.php
+
+		-
+			message: "#^Call to method arrayNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\<null\\>\\>\\.$#"
+			count: 5
+			path: packages/messenger/DependencyInjection/MessengerIntegration.php
+
+		-
+			message: "#^Call to method arrayNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\>\\.$#"
+			count: 1
+			path: packages/messenger/DependencyInjection/MessengerIntegration.php
 
 		-
 			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertEmpty\\(\\) with array\\{object\\{\\}&stdClass, object\\{\\}&stdClass\\} will always evaluate to false\\.$#"
 			count: 1
 			path: packages/messenger/Tests/DoctrineMessageBusHook/Entity/MessageHolderTraitTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$encodedEnvelope of method Draw\\\\Component\\\\Messenger\\\\SerializerEventDispatcher\\\\EventDispatcherSerializerDecorator\\:\\:decode\\(\\) expects array\\{body\\: string, headers\\?\\: array\\<string, string\\>\\}, array\\{body\\: '', headers\\: ''\\} given\\.$#"
+			count: 1
+			path: packages/messenger/Tests/SerializerEventDispatcher/EventDispatcherSerializerDecoratorTest.php
+
+		-
+			message: "#^Call to method append\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\>\\.$#"
+			count: 1
+			path: packages/open-api/DependencyInjection/OpenApiIntegration.php
+
+		-
+			message: "#^Call to method arrayNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\<null\\>\\>\\.$#"
+			count: 3
+			path: packages/open-api/DependencyInjection/OpenApiIntegration.php
+
+		-
+			message: "#^Call to method booleanNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\<null\\>\\>\\.$#"
+			count: 1
+			path: packages/open-api/DependencyInjection/OpenApiIntegration.php
+
+		-
+			message: "#^Call to method children\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\<null\\>\\>\\.$#"
+			count: 1
+			path: packages/open-api/DependencyInjection/OpenApiIntegration.php
+
+		-
+			message: "#^Call to method end\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ScalarNodeDefinition\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\<null\\>\\>\\.$#"
+			count: 1
+			path: packages/open-api/DependencyInjection/OpenApiIntegration.php
+
+		-
+			message: "#^Call to method normalizeKeys\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\<null\\>\\>\\.$#"
+			count: 1
+			path: packages/open-api/DependencyInjection/OpenApiIntegration.php
+
+		-
+			message: "#^Call to method scalarNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\<null\\>\\>\\.$#"
+			count: 2
+			path: packages/open-api/DependencyInjection/OpenApiIntegration.php
 
 		-
 			message: "#^Parameter \\$param of method Draw\\\\Component\\\\OpenApi\\\\Tests\\\\Extraction\\\\Extractor\\\\PhpDoc\\\\PhpDocOperationExtractorStubService\\:\\:invalidTypeParameter\\(\\) has invalid type Draw\\\\Component\\\\OpenApi\\\\Tests\\\\Extraction\\\\Extractor\\\\PhpDoc\\\\toto\\.$#"
@@ -26,9 +121,104 @@ parameters:
 			path: packages/open-api/Tests/Mock/Model/TestClass.php
 
 		-
+			message: "#^Call to method scalarNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\>\\.$#"
+			count: 1
+			path: packages/security/DependencyInjection/Factory/JwtAuthenticatorFactory.php
+
+		-
+			message: "#^Call to method scalarNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\>\\.$#"
+			count: 1
+			path: packages/security/DependencyInjection/Factory/MessengerMessageAuthenticatorFactory.php
+
+		-
+			message: "#^Call to method arrayNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\>\\.$#"
+			count: 1
+			path: packages/security/DependencyInjection/SecurityIntegration.php
+
+		-
+			message: "#^Call to method scalarNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<static\\(Draw\\\\Bundle\\\\SonataExtraBundle\\\\Configuration\\\\SonataAdminNodeConfiguration\\)\\>\\.$#"
+			count: 1
+			path: packages/sonata-extra-bundle/Configuration/SonataAdminNodeConfiguration.php
+
+		-
+			message: "#^Call to method arrayNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\<null\\>\\>\\.$#"
+			count: 1
+			path: packages/sonata-extra-bundle/DependencyInjection/Configuration.php
+
+		-
+			message: "#^Call to method booleanNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\<null\\>\\>\\.$#"
+			count: 1
+			path: packages/sonata-extra-bundle/DependencyInjection/Configuration.php
+
+		-
+			message: "#^Call to method booleanNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\>\\.$#"
+			count: 1
+			path: packages/sonata-extra-bundle/DependencyInjection/Configuration.php
+
+		-
+			message: "#^Call to method integerNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\<null\\>\\>\\.$#"
+			count: 2
+			path: packages/sonata-extra-bundle/DependencyInjection/Configuration.php
+
+		-
+			message: "#^Call to method scalarNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\<null\\>\\>\\.$#"
+			count: 1
+			path: packages/sonata-extra-bundle/DependencyInjection/Configuration.php
+
+		-
+			message: "#^Call to method variableNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\<null\\>\\>\\.$#"
+			count: 1
+			path: packages/sonata-extra-bundle/DependencyInjection/Configuration.php
+
+		-
+			message: "#^Method class@anonymous/packages/sonata\\-extra\\-bundle/Tests/EventListener/SessionTimeoutRequestListenerTest\\.php\\:331\\:\\:getUserIdentifier\\(\\) should return non\\-empty\\-string but returns ''\\.$#"
+			count: 1
+			path: packages/sonata-extra-bundle/Tests/EventListener/SessionTimeoutRequestListenerTest.php
+
+		-
+			message: "#^Call to method arrayNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\<null\\>\\>\\.$#"
+			count: 1
+			path: packages/sonata-import-bundle/DependencyInjection/Configuration.php
+
+		-
+			message: "#^Call to method scalarNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\>\\.$#"
+			count: 1
+			path: packages/sonata-import-bundle/DependencyInjection/Configuration.php
+
+		-
 			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertInstanceOf\\(\\) with 'DateTime' and null will always evaluate to false\\.$#"
 			count: 2
 			path: packages/sonata-import-bundle/Tests/Entity/ImportTest.php
+
+		-
+			message: "#^Call to method append\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\>\\.$#"
+			count: 1
+			path: packages/sonata-integration-bundle/DependencyInjection/Configuration.php
+
+		-
+			message: "#^Call to method arrayNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\<null\\>\\>\\.$#"
+			count: 1
+			path: packages/sonata-integration-bundle/DependencyInjection/Configuration.php
+
+		-
+			message: "#^Call to method arrayNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\>\\.$#"
+			count: 3
+			path: packages/sonata-integration-bundle/DependencyInjection/Configuration.php
+
+		-
+			message: "#^Call to method scalarNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\>\\.$#"
+			count: 1
+			path: packages/sonata-integration-bundle/DependencyInjection/Configuration.php
+
+		-
+			message: "#^Call to method scalarNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\>\\.$#"
+			count: 1
+			path: packages/sonata-integration-bundle/DependencyInjection/Factory/Security/AdminLoginFactory.php
+
+		-
+			message: "#^Method class@anonymous/packages/sonata\\-integration\\-bundle/Tests/User/Action/TwoFactorAuthenticationResendCodeActionTest\\.php\\:38\\:\\:getUserIdentifier\\(\\) should return non\\-empty\\-string but returns ''\\.$#"
+			count: 1
+			path: packages/sonata-integration-bundle/Tests/User/Action/TwoFactorAuthenticationResendCodeActionTest.php
 
 		-
 			message: "#^Class Draw\\\\Bundle\\\\SonataIntegrationBundle\\\\User\\\\Security\\\\AdminLoginAuthenticator extends @final class Symfony\\\\Component\\\\Security\\\\Http\\\\Authenticator\\\\FormLoginAuthenticator\\.$#"
@@ -36,9 +226,39 @@ parameters:
 			path: packages/sonata-integration-bundle/User/Security/AdminLoginAuthenticator.php
 
 		-
+			message: "#^Call to method arrayNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\>\\.$#"
+			count: 1
+			path: packages/tester-bundle/DependencyInjection/Configuration.php
+
+		-
 			message: "#^Parameter \\#1 \\$callback of function set_error_handler expects \\(callable\\(int, string, string, int\\)\\: bool\\)\\|null, Closure\\(\\)\\: null given\\.$#"
 			count: 1
 			path: packages/tester-bundle/Tests/bootstrap.php
+
+		-
+			message: "#^Call to method append\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\>\\.$#"
+			count: 1
+			path: packages/user-bundle/DependencyInjection/Configuration.php
+
+		-
+			message: "#^Call to method arrayNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\<null\\>\\>\\.$#"
+			count: 1
+			path: packages/user-bundle/DependencyInjection/Configuration.php
+
+		-
+			message: "#^Call to method scalarNode\\(\\) on an unknown class Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeBuilder\\<Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition\\<null\\>\\>\\.$#"
+			count: 2
+			path: packages/user-bundle/DependencyInjection/Configuration.php
+
+		-
+			message: "#^Method class@anonymous/packages/user\\-bundle/Tests/EventListener/TwoFactorAuthenticationListenerTest\\.php\\:119\\:\\:getUserIdentifier\\(\\) should return non\\-empty\\-string but returns ''\\.$#"
+			count: 1
+			path: packages/user-bundle/Tests/EventListener/TwoFactorAuthenticationListenerTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$type of class Symfony\\\\Component\\\\Validator\\\\Constraints\\\\Type constructor expects array\\<int, string\\>\\|string\\|null, array\\<string, string\\> given\\.$#"
+			count: 1
+			path: packages/validator/Constraints/Strtotime.php
 
 		-
 			message: "#^Parameter \\#1 \\$callback of function set_error_handler expects \\(callable\\(int, string, string, int\\)\\: bool\\)\\|null, Closure\\(\\)\\: null given\\.$#"
