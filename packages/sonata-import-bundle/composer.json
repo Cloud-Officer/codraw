@@ -22,7 +22,8 @@
         "sonata-project/doctrine-orm-admin-bundle": "^4.2",
         "symfony/event-dispatcher": "^6.4 || ^7.0",
         "symfony/notifier": "^6.4 || ^7.0",
-        "symfony/validator": "^6.4 || ^7.0"
+        "symfony/validator": "^6.4 || ^7.0",
+        "symfony/var-exporter": "^6.4 || ^7.0"
     },
     "require-dev": {
         "draw/tester": "^0.39",

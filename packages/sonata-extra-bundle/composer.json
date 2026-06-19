@@ -13,7 +13,8 @@
         "symfony/browser-kit": "^6.4 || ^7.0",
         "symfony/framework-bundle": "^6.4 || ^7.0",
         "symfony/expression-language": "^6.4 || ^7.0",
-        "symfony/string": "^6.4 || ^7.0"
+        "symfony/string": "^6.4 || ^7.0",
+        "symfony/var-exporter": "^6.4 || ^7.0"
     },
     "require-dev": {
         "cweagans/composer-patches": "^1.7",
