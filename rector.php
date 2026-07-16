@@ -48,12 +48,19 @@ return RectorConfig::configure()
         Rector\Php83\Rector\ClassConst\AddTypeToConstRector::class => [
             __DIR__.'/packages/fixer/Tests/fixtures',
         ],
+        Rector\Php84\Rector\Class_\DeprecatedAnnotationToDeprecatedAttributeRector::class => [
+            __DIR__.'/packages/open-api/Tests/Extraction/Extractor/PhpDoc/OperationExtractorTest.php',
+        ],
         Rector\Php85\Rector\Property\AddOverrideAttributeToOverriddenPropertiesRector::class,
+
+        // PHPUnit
+        Rector\PHPUnit\PHPUnit120\Rector\Class_\AllowMockObjectsForDataProviderRector::class,
 
         // Symfony
         Rector\Symfony\CodeQuality\Rector\Class_\ControllerMethodInjectionToConstructorRector::class,
         // @see `sonata-project/admin-bundle/src/Route/RouteCollection.php:186`
         Rector\Symfony\CodeQuality\Rector\ClassMethod\ActionSuffixRemoverRector::class => [
+            __DIR__.'/packages/sonata-extra-bundle/Controller/BatchAdminController.php',
             __DIR__.'/packages/sonata-integration-bundle/Console/Controller/ExecutionController.php',
             __DIR__.'/packages/sonata-integration-bundle/CronJob/Controller/CronJobController.php',
             __DIR__.'/packages/sonata-integration-bundle/CronJob/Controller/CronJobExecutionController.php',
