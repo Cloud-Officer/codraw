@@ -50,10 +50,10 @@ jobs:
       -
         uses: "./.github/actions/git-split"
         with:
-          user_name: 'mpoiriert'
-          user_email: 'mpoiriert@gmail.com'
-          access_token: '${{ secrets.GH_ACCESS_TOKEN }}'
+          user_name: 'tlacroix'
+          user_email: 'tlacroix@nuagelab.com'
+          access_token: "${{secrets.GH_PAT}}"
           git_ref: '${{ github.ref }}'
-          source_repository: 'mpoiriert/draw'
+          source_repository: 'cloud-officer/codraw'
           source_directory: 'packages/${{ matrix.packages }}'
-          target_repository: 'mpoiriert/${{ matrix.packages }}'
+          target_repository: 'cloud-officer/codraw-${{ matrix.packages }}'
