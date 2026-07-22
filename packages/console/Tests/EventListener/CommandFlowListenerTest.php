@@ -154,7 +154,7 @@ class CommandFlowListenerTest extends TestCase
         );
 
         static::assertSame(
-            'The existing execution id of the command. Use internally by draw/console.',
+            'The existing execution id of the command. Use internally by codraw/console.',
             $option->getDescription()
         );
     }

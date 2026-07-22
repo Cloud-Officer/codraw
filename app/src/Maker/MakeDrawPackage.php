@@ -124,7 +124,7 @@ class MakeDrawPackage extends AbstractMaker
 
         ksort($composer['autoload']['psr-4']);
 
-        $composer['replace']['draw/'.$packageName] = 'self.version';
+        $composer['replace']['codraw/'.$packageName] = 'self.version';
 
         ksort($composer['replace']);
 
