@@ -81,7 +81,7 @@ class CommandFlowListener implements EventSubscriberInterface
                     self::OPTION_EXECUTION_ID,
                     null,
                     InputOption::VALUE_REQUIRED,
-                    'The existing execution id of the command. Use internally by draw/console.',
+                    'The existing execution id of the command. Use internally by codraw/console.',
                 )
             );
         }

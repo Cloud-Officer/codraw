@@ -2,11 +2,11 @@
 
 This document describes how to create a new package for in the monorepo structure.
 
-In this example we will create a new package called `draw/demo` and the namespace will be `Draw\Component\Demo`.
+In this example we will create a new package called `codraw/demo` and the namespace will be `Draw\Component\Demo`.
 
 > Except for the first step, you can run `bin/console make:draw-package` to create the package.
 
-### Step 1: Create the draw/demo repository on Github
+### Step 1: Create the codraw/demo repository on Github
 
 The repository must be an exact match of the package name.
 
@@ -21,7 +21,7 @@ Add the package to the replace section:
 ```json
 {
     "replace": {
-        "draw/demo": "self.version"
+        "codraw/demo": "self.version"
     }
 }
 ```
@@ -48,7 +48,7 @@ Add the package to the autoload section:
 
 ```json
 {
-  "name": "draw/demo",
+  "name": "codraw/demo",
   "description": "Demo package",
   "license": "MIT",
   "type": "library",
