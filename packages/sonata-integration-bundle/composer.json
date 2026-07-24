@@ -11,8 +11,8 @@
         "php": ">=8.5",
         "codraw/framework-extra-bundle": "^0.39",
         "codraw/sonata-extra-bundle": "^0.39",
-        "symfony/framework-bundle": "^6.4.0",
-        "symfony/expression-language": "^6.4.0",
+        "symfony/framework-bundle": "^7.4.0",
+        "symfony/expression-language": "^7.4.0",
         "sonata-project/admin-bundle": "^4.8",
         "sonata-project/doctrine-orm-admin-bundle": "^4.2"
     },
@@ -43,6 +43,6 @@
         }
     },
     "replace": {
-        "draw/sonata-integration-bundle": "self.version"
+        "codraw/sonata-integration-bundle": "self.version"
     }
 }

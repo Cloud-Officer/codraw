@@ -52,7 +52,7 @@ class SendTestEmailCommandTest extends TestCase
 
         $to = uniqid('email-').'@example.com';
         $mailer
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('send')
             ->with(
                 static::callback(

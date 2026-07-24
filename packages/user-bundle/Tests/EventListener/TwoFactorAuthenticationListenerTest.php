@@ -60,7 +60,7 @@ class TwoFactorAuthenticationListenerTest extends TestCase
 
             $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
             $urlGenerator
-                ->expects(static::once())
+                ->expects($this->once())
                 ->method('generate')
                 ->with(
                     self::ENABLE_ROUTE,
@@ -118,9 +118,10 @@ class TwoFactorAuthenticationListenerTest extends TestCase
 
                     public function getUserIdentifier(): string
                     {
-                        return '';
+                        return uniqid('id-');
                     }
 
+                    #[\Deprecated]
                     public function eraseCredentials(): void
                     {
                     }
@@ -282,7 +283,7 @@ class TwoFactorAuthenticationListenerTest extends TestCase
         );
 
         $security
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('isGranted')
             ->with('IS_AUTHENTICATED_2FA_IN_PROGRESS')
             ->willReturn(true)
@@ -307,7 +308,7 @@ class TwoFactorAuthenticationListenerTest extends TestCase
         );
 
         $security
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('isGranted')
             ->with('IS_AUTHENTICATED_2FA_IN_PROGRESS')
             ->willReturn(false)

@@ -11,12 +11,12 @@
     "require": {
         "php": ">=8.5",
         "codraw/core": "^0.39",
-        "symfony/dom-crawler": "^6.4.0",
-        "symfony/css-selector": "^6.4.0",
-        "symfony/console": "^6.4.0",
-        "symfony/mailer": "^6.4.0",
-        "symfony/translation": "^6.4.0",
-        "symfony/twig-bridge": "^6.4.0",
+        "symfony/dom-crawler": "^7.4.0",
+        "symfony/css-selector": "^7.4.0",
+        "symfony/console": "^7.4.0",
+        "symfony/mailer": "^7.4.0",
+        "symfony/translation": "^7.4.0",
+        "symfony/twig-bridge": "^7.4.0",
         "twig/twig": "^3.3"
     },
     "require-dev": {
@@ -38,6 +38,6 @@
         }
     },
     "replace": {
-        "draw/mailer": "self.version"
+        "codraw/mailer": "self.version"
     }
 }

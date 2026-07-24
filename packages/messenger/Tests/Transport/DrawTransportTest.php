@@ -76,7 +76,7 @@ class DrawTransportTest extends TestCase
             Connection::class
         );
 
-        $driverConnection->expects(static::once())
+        $driverConnection->expects($this->once())
             ->method('createQueryBuilder')
             ->willThrowException(new \Exception($exceptionMessage = uniqid('exception-message-')))
         ;
@@ -165,7 +165,7 @@ class DrawTransportTest extends TestCase
             Connection::class
         );
 
-        $driverConnection->expects(static::never())
+        $driverConnection->expects($this->never())
             ->method('createQueryBuilder')
         ;
 

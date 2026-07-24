@@ -25,6 +25,12 @@ parameters:
 			path: app/src/Message/NewUserMessage.php
 
 		-
+			message: '#^Unsafe call to private method Draw\\Component\\Core\\Tests\\Reflection\\ReflectionAccessorTest\:\:privateStaticFunction\(\) through static\:\:\.$#'
+			identifier: staticClassAccess.privateMethod
+			count: 2
+			path: packages/core/Tests/Reflection/ReflectionAccessorTest.php
+
+		-
 			message: '#^Property Draw\\Component\\CronJob\\Entity\\CronJob\:\:\$id \(int\|null\) is never assigned int so it can be removed from the property type\.$#'
 			identifier: property.unusedType
 			count: 1
@@ -59,12 +65,6 @@ parameters:
 			identifier: function.alreadyNarrowedType
 			count: 1
 			path: packages/log/DependencyInjection/Compiler/LoggerDecoratorPass.php
-
-		-
-			message: '#^Parameter \#1 \$node of method Symfony\\Component\\Config\\Definition\\Builder\\NodeBuilder\:\:append\(\) expects Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition, Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: packages/log/DependencyInjection/LogIntegration.php
 
 		-
 			message: '#^Property Draw\\Component\\Messenger\\Tests\\EventListener\\StopOnNewVersionListenerTest\:\:\$deployedVersion \(string\|null\) is never assigned string so it can be removed from the property type\.$#'
@@ -151,16 +151,16 @@ parameters:
 			path: packages/sonata-integration-bundle/User/Security/AdminLoginAuthenticator.php
 
 		-
+			message: '#^Trait Draw\\Bundle\\TesterBundle\\EventDispatcher\\EventListenerTestTrait is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: packages/tester-bundle/EventDispatcher/EventListenerTestTrait.php
+
+		-
 			message: '#^Trait Draw\\Bundle\\TesterBundle\\Messenger\\MessageHandlerAssertionTrait is used zero times and is not analysed\.$#'
 			identifier: trait.unused
 			count: 1
 			path: packages/tester-bundle/Messenger/MessageHandlerAssertionTrait.php
-
-		-
-			message: '#^Parameter \#1 \$callback of function set_error_handler expects \(callable\(int, string, string, int\)\: bool\)\|null, Closure\(\)\: null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: packages/tester-bundle/Tests/bootstrap.php
 
 		-
 			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Draw\\\\Component\\\\Tester\\\\DataTester'' and Draw\\Component\\Tester\\DataTester will always evaluate to true\.$#'
@@ -191,10 +191,3 @@ parameters:
 			identifier: property.unusedType
 			count: 1
 			path: packages/user-bundle/DTO/Credential.php
-
-		-
-			message: '#^Parameter \#1 \$callback of function set_error_handler expects \(callable\(int, string, string, int\)\: bool\)\|null, Closure\(\)\: null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/bootstrap.php
-

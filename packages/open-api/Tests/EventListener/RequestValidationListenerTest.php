@@ -57,7 +57,7 @@ class RequestValidationListenerTest extends TestCase
         );
 
         $validator
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('validate')
         ;
 
@@ -83,7 +83,7 @@ class RequestValidationListenerTest extends TestCase
         $request->attributes->set($name, $bodyObject = (object) []);
 
         $validator
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('validate')
             ->with($bodyObject, null, ['Default'])
             ->willReturn(static::createStub(ConstraintViolationListInterface::class))
@@ -112,7 +112,7 @@ class RequestValidationListenerTest extends TestCase
         $request->attributes->set($name, $parameterObject = (object) []);
 
         $validator
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('validate')
             ->with($parameterObject, [], null)
             ->willReturn(static::createStub(ConstraintViolationListInterface::class))
@@ -141,7 +141,7 @@ class RequestValidationListenerTest extends TestCase
         $request->attributes->set($name, (object) []);
 
         $validator
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('validate')
         ;
 
@@ -176,7 +176,7 @@ class RequestValidationListenerTest extends TestCase
         $queryParameter->constraints = [new NotNull()];
 
         $validator
-            ->expects(static::exactly(2))
+            ->expects($this->exactly(2))
             ->method('validate')
             ->with(
                 ...static::withConsecutive(

@@ -7,7 +7,6 @@ use Draw\Component\Tester\DoubleTrait;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Twig\TwigFilter;
 
 /**
  * @internal
@@ -16,31 +15,6 @@ use Twig\TwigFilter;
 class TranslationExtensionTest extends TestCase
 {
     use DoubleTrait;
-
-    public function testGetFilters(): void
-    {
-        $object = new TranslationExtension(
-            static::createStub(TranslatorInterface::class)
-        );
-
-        $filters = $object->getFilters();
-
-        static::assertCount(1, $filters);
-
-        $filter = $filters[0];
-
-        static::assertInstanceOf(TwigFilter::class, $filter);
-
-        static::assertSame(
-            'trans',
-            $filter->getName(),
-        );
-
-        static::assertSame(
-            [$object, 'trans'],
-            $filter->getCallable()
-        );
-    }
 
     public function testTrans(): void
     {
@@ -55,7 +29,7 @@ class TranslationExtensionTest extends TestCase
         $count = random_int(0, \PHP_INT_MAX);
 
         $translator
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('trans')
             ->with(
                 $message,
@@ -88,7 +62,7 @@ class TranslationExtensionTest extends TestCase
         $message2 = uniqid('message-');
 
         $translator
-            ->expects(static::exactly(2))
+            ->expects($this->exactly(2))
             ->method('trans')
             ->with(
                 ...static::withConsecutive(

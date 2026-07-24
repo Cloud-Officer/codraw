@@ -50,13 +50,13 @@ class EmailSubjectFromHtmlTitleListenerTest extends TestCase
         $message = $this->createMock(Email::class);
 
         $message
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getSubject')
             ->willReturn('Subject')
         ;
 
         $message
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('subject')
         ;
 
@@ -68,13 +68,13 @@ class EmailSubjectFromHtmlTitleListenerTest extends TestCase
         $message = $this->createMock(Email::class);
 
         $message
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getHtmlBody')
             ->willReturn('')
         ;
 
         $message
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('subject')
         ;
 
@@ -86,13 +86,13 @@ class EmailSubjectFromHtmlTitleListenerTest extends TestCase
         $message = $this->createMock(Email::class);
 
         $message
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getHtmlBody')
             ->willReturn('<div></div>')
         ;
 
         $message
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('subject')
         ;
 
@@ -104,13 +104,13 @@ class EmailSubjectFromHtmlTitleListenerTest extends TestCase
         $message = $this->createMock(Email::class);
 
         $message
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getHtmlBody')
             ->willReturn('<html lang="en"><head><title></title></head></html>')
         ;
 
         $message
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('subject')
         ;
 
@@ -122,13 +122,13 @@ class EmailSubjectFromHtmlTitleListenerTest extends TestCase
         $message = $this->createMock(Email::class);
 
         $message
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getHtmlBody')
             ->willReturn('<html lang="en"><head><title>Title</title></head></html>')
         ;
 
         $message
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('subject')
             ->with('Title')
         ;

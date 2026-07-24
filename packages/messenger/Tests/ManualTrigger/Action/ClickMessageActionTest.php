@@ -58,19 +58,19 @@ class ClickMessageActionTest extends TestCase
         );
 
         $messageBus
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('dispatch')
         ;
 
         $envelopeFinder
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('findById')
             ->with($messageId = uniqid('message-Id'))
             ->willThrowException(new MessageNotFoundException($messageId))
         ;
 
         $eventDispatcher
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->with(
                 static::callback(
@@ -101,7 +101,7 @@ class ClickMessageActionTest extends TestCase
 
         if ($translatedMessage) {
             $translator
-                ->expects(static::once())
+                ->expects($this->once())
                 ->method('trans')
                 ->with($translatedMessage, [], 'DrawMessenger')
                 ->willReturn($message = uniqid('translation-'))
@@ -109,7 +109,7 @@ class ClickMessageActionTest extends TestCase
         } else {
             $this->request->setSession(static::createStub(SessionInterface::class));
             $translator
-                ->expects(static::never())
+                ->expects($this->never())
                 ->method('trans')
             ;
         }
@@ -167,14 +167,14 @@ class ClickMessageActionTest extends TestCase
         $transportName = uniqid('transport-');
 
         $envelopeFinder
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('findById')
             ->with($messageId = uniqid('message-Id'))
             ->willReturn(new Envelope((object) [], [new FoundFromTransportStamp($transportName)]))
         ;
 
         $messageBus
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->with(
                 static::callback(function (Envelope $envelope) use ($transportName) {
@@ -195,21 +195,21 @@ class ClickMessageActionTest extends TestCase
         ;
 
         $translator
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('trans')
             ->with('link.processed', [], 'DrawMessenger')
             ->willReturn($message = uniqid('translation-'))
         ;
 
         $transportRepository
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('get')
             ->with($transportName)
             ->willReturn($transport = $this->createMock(TransportInterface::class))
         ;
 
         $transport
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('ack')
             ->with($envelope)
         ;
@@ -247,14 +247,14 @@ class ClickMessageActionTest extends TestCase
         $transportName = uniqid('transport-');
 
         $envelopeFinder
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('findById')
             ->with($messageId = uniqid('message-Id'))
             ->willReturn(new Envelope((object) [], [new FoundFromTransportStamp($transportName)]))
         ;
 
         $messageBus
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->willReturn(
                 $envelope = new Envelope(
@@ -268,19 +268,19 @@ class ClickMessageActionTest extends TestCase
         ;
 
         $translator
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('trans')
         ;
 
         $transportRepository
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('get')
             ->with($transportName)
             ->willReturn($transport = $this->createMock(TransportInterface::class))
         ;
 
         $transport
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('ack')
             ->with($envelope)
         ;
@@ -304,7 +304,7 @@ class ClickMessageActionTest extends TestCase
         $transportName = uniqid('transport-');
 
         $envelopeFinder
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('findById')
             ->with($messageId = uniqid('message-Id'))
             ->willReturn(
@@ -316,7 +316,7 @@ class ClickMessageActionTest extends TestCase
         ;
 
         $messageBus
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->willReturn(
                 new Envelope(
@@ -331,14 +331,14 @@ class ClickMessageActionTest extends TestCase
         ;
 
         $translator
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('trans')
         ;
 
         $response = new Response();
 
         $eventDispatcher
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->with(
                 static::callback(

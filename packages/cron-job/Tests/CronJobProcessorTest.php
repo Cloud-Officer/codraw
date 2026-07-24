@@ -46,7 +46,7 @@ class CronJobProcessorTest extends TestCase
         );
 
         $managerRegistry
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getManagerForClass')
             ->with(CronJobExecution::class)
             ->willReturn($entityManager = $this->createMock(EntityManagerInterface::class))
@@ -54,25 +54,25 @@ class CronJobProcessorTest extends TestCase
 
         $cronJob = $this->createMock(CronJob::class);
         $cronJob
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('newExecution')
             ->with($force)
             ->willReturn($execution = $this->createCronJobExecution())
         ;
 
         $entityManager
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('persist')
             ->with($execution)
         ;
 
         $entityManager
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('flush')
         ;
 
         $messageBus
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->with($message = new ExecuteCronJobMessage($execution))
             ->willReturn(new Envelope($message, []))
@@ -105,7 +105,7 @@ class CronJobProcessorTest extends TestCase
         );
 
         $managerRegistry
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getManagerForClass')
             ->with(CronJobExecution::class)
             ->willReturn($entityManager = $this->createMock(EntityManagerInterface::class))
@@ -122,7 +122,7 @@ class CronJobProcessorTest extends TestCase
         $execution->getCronJob()->setExecutionTimeout($executionTimeout = random_int(1, 100));
 
         $eventDispatcher
-            ->expects(static::exactly(2))
+            ->expects($this->exactly(2))
             ->method('dispatch')
             ->with(
                 ...static::withConsecutive(
@@ -141,12 +141,12 @@ class CronJobProcessorTest extends TestCase
         ;
 
         $entityManager
-            ->expects(static::exactly(2))
+            ->expects($this->exactly(2))
             ->method('flush')
         ;
 
         $entityManager
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getConnection')
             ->willReturn(
                 $connection = $this->createMock(Connection::class)
@@ -154,12 +154,12 @@ class CronJobProcessorTest extends TestCase
         ;
 
         $connection
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('close')
         ;
 
         $processFactory
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('createFromShellCommandLine')
             ->with(
                 $expectedProcessCommand,
@@ -172,7 +172,7 @@ class CronJobProcessorTest extends TestCase
         ;
 
         $process
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('mustRun')
         ;
 
@@ -217,14 +217,14 @@ class CronJobProcessorTest extends TestCase
         );
 
         $managerRegistry
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getManagerForClass')
             ->with(CronJobExecution::class)
             ->willReturn($entityManager = $this->createMock(EntityManagerInterface::class))
         ;
 
         $eventDispatcher
-            ->expects(static::exactly(2))
+            ->expects($this->exactly(2))
             ->method('dispatch')
             ->with(
                 ...static::withConsecutive(
@@ -242,12 +242,12 @@ class CronJobProcessorTest extends TestCase
         ;
 
         $entityManager
-            ->expects(static::exactly(2))
+            ->expects($this->exactly(2))
             ->method('flush')
         ;
 
         $entityManager
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getConnection')
             ->willReturn(
                 $connection = $this->createMock(Connection::class)
@@ -255,19 +255,19 @@ class CronJobProcessorTest extends TestCase
         ;
 
         $connection
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('close')
         ;
 
         $process = $this->createMock(Process::class);
         $process
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getExitCode')
             ->willReturn($exitCode = 127)
         ;
 
         $process
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('mustRun')
             ->willThrowException(
                 new \Exception(
@@ -278,17 +278,17 @@ class CronJobProcessorTest extends TestCase
         ;
 
         $process
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getOutput')
         ;
 
         $process
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getErrorOutput')
         ;
 
         $processFactory
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('createFromShellCommandLine')
             ->with(
                 'echo 12345 > /var/cache/crontab.out',
@@ -323,24 +323,24 @@ class CronJobProcessorTest extends TestCase
         );
 
         $managerRegistry
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getManagerForClass')
             ->with(CronJobExecution::class)
             ->willReturn($entityManager = $this->createMock(EntityManagerInterface::class))
         ;
 
         $eventDispatcher
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('dispatch')
         ;
 
         $entityManager
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('flush')
         ;
 
         $processFactory
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('createFromShellCommandLine')
         ;
 
@@ -366,14 +366,14 @@ class CronJobProcessorTest extends TestCase
         );
 
         $managerRegistry
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getManagerForClass')
             ->with(CronJobExecution::class)
             ->willReturn($entityManager = $this->createMock(EntityManagerInterface::class))
         ;
 
         $eventDispatcher
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->with(
                 new PreCronJobExecutionEvent($execution = $this->createCronJobExecution())
@@ -384,12 +384,12 @@ class CronJobProcessorTest extends TestCase
         ;
 
         $entityManager
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('flush')
         ;
 
         $processFactory
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('createFromShellCommandLine')
         ;
 
