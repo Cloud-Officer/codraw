@@ -36,7 +36,7 @@ class DoctrineBusMessageListenerTest extends TestCase
         $messageHolder = static::createStub(MessageHolderInterface::class);
 
         $entityManager
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getClassMetadata')
             ->with($messageHolder::class)
             ->willReturn($classMetadata = new ClassMetadata(uniqid()))
@@ -69,7 +69,7 @@ class DoctrineBusMessageListenerTest extends TestCase
         $messageHolder = (object) [];
 
         $entityManager
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('getClassMetadata')
         ;
 
@@ -98,7 +98,7 @@ class DoctrineBusMessageListenerTest extends TestCase
         $messageHolder = static::createStub(MessageHolderInterface::class);
 
         $entityManager
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getClassMetadata')
             ->with($messageHolder::class)
             ->willReturn($classMetadata = new ClassMetadata(uniqid()))
@@ -171,12 +171,12 @@ class DoctrineBusMessageListenerTest extends TestCase
         );
 
         $envelopeFactory
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('createEnvelopes')
         ;
 
         $messageBus
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('dispatch')
         ;
 
@@ -210,12 +210,12 @@ class DoctrineBusMessageListenerTest extends TestCase
         );
 
         $envelopeFactory
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('createEnvelopes')
         ;
 
         $messageBus
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('dispatch')
         ;
 
@@ -233,7 +233,7 @@ class DoctrineBusMessageListenerTest extends TestCase
 
         $this->addMessageHolder($object, $messageHolder);
 
-        $messageHolder->expects(static::once())
+        $messageHolder->expects($this->once())
             ->method('getOnHoldMessages')
             ->with(true)
             ->willReturn(
@@ -246,25 +246,25 @@ class DoctrineBusMessageListenerTest extends TestCase
         ;
 
         $message1
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('preSend')
             ->with($messageHolder)
         ;
 
         $message2
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('preSend')
         ;
 
         $envelopeFactory
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('createEnvelopes')
             ->with($messageHolder, $messages)
             ->willReturn([$envelope = new Envelope((object) [])])
         ;
 
         $messageBus
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->with($envelope)
             ->willReturnArgument(0)
@@ -285,7 +285,7 @@ class DoctrineBusMessageListenerTest extends TestCase
         $this->addMessageHolder($object, $messageHolder);
 
         $messageHolder
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getOnHoldMessages')
             ->with(true)
             ->willReturn([(object) []])
@@ -296,20 +296,20 @@ class DoctrineBusMessageListenerTest extends TestCase
         $this->addMessageHolder($object, $messageHolder);
 
         $messageHolder
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getOnHoldMessages')
             ->with(true)
             ->willReturn([(object) []])
         ;
 
         $envelopeFactory
-            ->expects(static::exactly(2))
+            ->expects($this->exactly(2))
             ->method('createEnvelopes')
             ->willReturn([$envelope = new Envelope((object) [])])
         ;
 
         $messageBus
-            ->expects(static::exactly(2))
+            ->expects($this->exactly(2))
             ->method('dispatch')
             ->with($envelope)
             ->willReturnArgument(0)

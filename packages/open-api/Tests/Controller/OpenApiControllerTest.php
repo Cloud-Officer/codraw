@@ -35,14 +35,14 @@ class OpenApiControllerTest extends TestCase
         );
 
         $openApi
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('dump')
         ;
 
         $route = uniqid('route-');
 
         $urlGenerator
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('generate')
             ->with(
                 $route,
@@ -80,7 +80,7 @@ class OpenApiControllerTest extends TestCase
         $version = uniqid('version-');
 
         $urlGenerator
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('generate')
             ->with(
                 $route,
@@ -111,7 +111,7 @@ class OpenApiControllerTest extends TestCase
         $version = uniqid('version-');
 
         $schemaBuilder
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('build')
             ->with(
                 static::isInstanceOf(ExtractionContextInterface::class)
@@ -120,14 +120,14 @@ class OpenApiControllerTest extends TestCase
         ;
 
         $openApi
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dump')
             ->with($rootSchema)
             ->willReturn($rootSchemaJson = json_encode(['version' => $version], \JSON_THROW_ON_ERROR))
         ;
 
         $urlGenerator
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('generate')
         ;
 

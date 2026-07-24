@@ -18,10 +18,10 @@
         "codraw/contracts": "^0.39",
         "codraw/core": "^0.39",
         "ramsey/uuid": "^4.2",
-        "symfony/framework-bundle": "^6.4.0",
-        "symfony/security-core": "^6.4.0",
-        "symfony/security-http": "^6.4.0",
-        "symfony/yaml": "^6.4.0"
+        "symfony/framework-bundle": "^7.4.0",
+        "symfony/security-core": "^7.4.0",
+        "symfony/security-http": "^7.4.0",
+        "symfony/yaml": "^7.4.0"
     },
     "require-dev": {
         "codraw/framework-extra-bundle": "^0.39",
@@ -56,6 +56,6 @@
         }
     },
     "replace": {
-        "draw/user-bundle": "self.version"
+        "codraw/user-bundle": "self.version"
     }
 }

@@ -39,20 +39,20 @@ class MessageAuthenticatorTest extends TestCase
         $request->query->set('dMUuid', $messageId = uniqid('message-id'));
 
         $security
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getUser')
             ->willReturn(null)
         ;
 
         $envelopeFinder
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('findById')
             ->with($messageId)
             ->willReturn(new Envelope($this->createAutoConnectMessage($userIdentifier = uniqid('user-id-'))))
         ;
 
         $userProvider
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('loadUserByIdentifier')
             ->with($userIdentifier)
             ->willReturn(static::createStub(UserInterface::class))
@@ -73,20 +73,20 @@ class MessageAuthenticatorTest extends TestCase
         $request->query->set('dMUuid', $messageId = uniqid('message-id'));
 
         $security
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getUser')
             ->willReturn(static::createStub(UserInterface::class))
         ;
 
         $envelopeFinder
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('findById')
             ->with($messageId)
             ->willReturn(new Envelope($this->createAutoConnectMessage($userIdentifier = uniqid('user-id-'))))
         ;
 
         $userProvider
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('loadUserByIdentifier')
             ->with($userIdentifier)
             ->willReturn(static::createStub(UserInterface::class))
@@ -118,20 +118,20 @@ class MessageAuthenticatorTest extends TestCase
         $request->query->set('dMUuid', $messageId = uniqid('message-id'));
 
         $security
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getUser')
             ->willReturn($user = static::createStub(UserInterface::class))
         ;
 
         $envelopeFinder
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('findById')
             ->with($messageId)
             ->willReturn(new Envelope($this->createAutoConnectMessage($userIdentifier = uniqid('user-id-'))))
         ;
 
         $userProvider
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('loadUserByIdentifier')
             ->with($userIdentifier)
             ->willReturn($user)
@@ -152,7 +152,7 @@ class MessageAuthenticatorTest extends TestCase
         $request->query->set('dMUuid', $messageId = uniqid('message-id'));
 
         $envelopeFinder
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('findById')
             ->with($messageId)
             ->willThrowException(new MessageNotFoundException($messageId))
@@ -173,7 +173,7 @@ class MessageAuthenticatorTest extends TestCase
         $request->query->set('dMUuid', $messageId = uniqid('message-id'));
 
         $envelopeFinder
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('findById')
             ->with($messageId)
             ->willThrowException(new MessageNotFoundException($messageId))
@@ -197,7 +197,7 @@ class MessageAuthenticatorTest extends TestCase
         $request->query->set('dMUuid', $messageId = uniqid('message-id'));
 
         $envelopeFinder
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('findById')
             ->with($messageId)
             ->willReturn(new Envelope($this->createAutoConnectMessage($userIdentifier = uniqid('user-id-'))))
@@ -206,13 +206,13 @@ class MessageAuthenticatorTest extends TestCase
         $user = $this->createMock(UserInterface::class);
 
         $user
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getUserIdentifier')
             ->willReturn($userIdentifier)
         ;
 
         $userProvider
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('loadUserByIdentifier')
             ->with($userIdentifier)
             ->willReturn($user)

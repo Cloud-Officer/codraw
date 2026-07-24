@@ -37,13 +37,13 @@ class SystemMessengerAuthenticatorListenerTest extends TestCase
         );
 
         $tokenStorage
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getToken')
             ->willReturn(static::createStub(TokenInterface::class))
         ;
 
         $tokenStorage
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('setToken')
         ;
 
@@ -58,19 +58,19 @@ class SystemMessengerAuthenticatorListenerTest extends TestCase
         );
 
         $tokenStorage
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getToken')
             ->willReturn(null)
         ;
 
         $tokenStorage
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('setToken')
             ->with($token = static::createStub(TokenInterface::class))
         ;
 
         $systemAuthenticator
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getTokenForSystem')
             ->willReturn($token)
         ;

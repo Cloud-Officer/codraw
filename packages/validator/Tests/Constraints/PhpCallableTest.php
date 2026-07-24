@@ -37,22 +37,6 @@ class PhpCallableTest extends TestCase
         static::assertNull($this->object->returnValueConstraint);
     }
 
-    public function testGetDefaultOption(): void
-    {
-        static::assertSame(
-            'callable',
-            $this->object->getDefaultOption()
-        );
-    }
-
-    public function testGetRequiredOptions(): void
-    {
-        static::assertSame(
-            ['callable'],
-            $this->object->getRequiredOptions()
-        );
-    }
-
     public function testValidatedBy(): void
     {
         static::assertSame(

@@ -33,13 +33,13 @@ class BufferedConsoleOutputTest extends TestCase
         );
 
         $formatter
-            ->expects(static::exactly(3))
+            ->expects($this->exactly(3))
             ->method('isDecorated')
             ->willReturnOnConsecutiveCalls(false, true, true)
         ;
 
         $formatter
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('setDecorated')
             ->with(true)
         ;

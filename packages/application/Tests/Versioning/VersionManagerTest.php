@@ -24,7 +24,7 @@ class VersionManagerTest extends TestCase
         );
 
         $eventDispatcher
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->with(static::isInstanceOf(FetchRunningVersionEvent::class))
             ->willReturnArgument(0)
@@ -46,7 +46,7 @@ class VersionManagerTest extends TestCase
         $version = uniqid('version-');
 
         $eventDispatcher
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->with(
                 static::callback(static function (FetchRunningVersionEvent $event) use ($version) {
@@ -80,7 +80,7 @@ class VersionManagerTest extends TestCase
         );
 
         $configurationRegistry
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('set')
             ->with($service::CONFIG, $version)
         ;
@@ -96,7 +96,7 @@ class VersionManagerTest extends TestCase
         );
 
         $configurationRegistry
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('get')
             ->with($service::CONFIG)
             ->willReturn($version = uniqid('version-'))
@@ -116,7 +116,7 @@ class VersionManagerTest extends TestCase
         );
 
         $configurationRegistry
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('get')
             ->with($service::CONFIG)
             ->willReturn($version = uniqid('version-'))
@@ -139,7 +139,7 @@ class VersionManagerTest extends TestCase
         );
 
         $configurationRegistry
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('get')
             ->with($service::CONFIG)
             ->willReturn(uniqid('version-'))

@@ -36,17 +36,17 @@ class EventDispatcherSerializerDecoratorTest extends TestCase
 
     public function testDecode(): void
     {
-        $data = ['body' => '', 'headers' => ''];
+        $data = ['body' => '', 'headers' => []];
 
         $this->serializer
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('decode')
             ->with($data)
             ->willReturn($envelope = new Envelope((object) []))
         ;
 
         $this->eventDispatcher
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->with(
                 new PostDecodeEvent($envelope)
@@ -65,7 +65,7 @@ class EventDispatcherSerializerDecoratorTest extends TestCase
         $envelope = new Envelope((object) []);
 
         $this->eventDispatcher
-            ->expects(static::exactly(2))
+            ->expects($this->exactly(2))
             ->method('dispatch')
             ->with(
                 ...static::withConsecutive(
@@ -77,7 +77,7 @@ class EventDispatcherSerializerDecoratorTest extends TestCase
         ;
 
         $this->serializer
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('encode')
             ->with($envelope)
             ->willReturn($data = ['body' => '', 'headers' => ''])

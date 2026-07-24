@@ -63,14 +63,14 @@ class QueueDueCronJobsCommandTest extends TestCase
         );
 
         $managerRegistry
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getRepository')
             ->with(CronJob::class)
             ->willReturn($repository = $this->createMock(EntityRepository::class))
         ;
 
         $repository
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('findBy')
             ->with(['active' => true])
             ->willReturn(
@@ -91,12 +91,12 @@ class QueueDueCronJobsCommandTest extends TestCase
 
         if (0 === $numDueCronJobs = \count($dueCronJobs)) {
             $cronJobProcessor
-                ->expects(static::never())
+                ->expects($this->never())
                 ->method('queue')
             ;
         } else {
             $cronJobProcessor
-                ->expects(static::exactly($numDueCronJobs))
+                ->expects($this->exactly($numDueCronJobs))
                 ->method('queue')
                 ->with(
                     ...static::withConsecutive(...array_map(

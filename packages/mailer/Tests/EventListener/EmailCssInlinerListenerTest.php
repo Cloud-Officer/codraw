@@ -57,13 +57,13 @@ class EmailCssInlinerListenerTest extends TestCase
         );
 
         $message
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getHtmlBody')
             ->willReturn('')
         ;
 
         $message
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('html')
         ;
 
@@ -82,13 +82,13 @@ class EmailCssInlinerListenerTest extends TestCase
         );
 
         $message
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getHtmlBody')
             ->willReturn('<html lang="en"><head><title></title><style>.body {background: maroon}</style></head><div class="body"></div></html>')
         ;
 
         $message
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('html')
             ->with('<!DOCTYPE html>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title></title></head><body><div class="body" style="background: maroon;"></div></body></html>
