@@ -57,9 +57,9 @@ class OpenApiTest extends TestCase
             $extractor2 = $this->createMock(ExtractorInterface::class),
         ]);
 
-        $extractor1->expects(static::once())->method('canExtract')->willReturn(true);
-        $extractor1->expects(static::once())->method('extract')->willThrowException(new ExtractionCompletedException());
-        $extractor2->expects(static::never())->method('canExtract');
+        $extractor1->expects($this->once())->method('canExtract')->willReturn(true);
+        $extractor1->expects($this->once())->method('extract')->willThrowException(new ExtractionCompletedException());
+        $extractor2->expects($this->never())->method('canExtract');
 
         $this->object->extract('');
     }

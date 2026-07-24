@@ -42,6 +42,6 @@
         }
     },
     "replace": {
-        "draw/doctrine-extra": "self.version"
+        "codraw/doctrine-extra": "self.version"
     }
 }

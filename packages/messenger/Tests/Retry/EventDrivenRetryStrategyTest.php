@@ -35,7 +35,7 @@ class EventDrivenRetryStrategyTest extends TestCase
         $envelope = new Envelope(new \stdClass());
 
         $this->eventDispatcher
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->willReturnCallback(
                 static function (IsRetryableEvent $event) use ($envelope) {
@@ -54,7 +54,7 @@ class EventDrivenRetryStrategyTest extends TestCase
         $envelope = new Envelope(new \stdClass());
 
         $this->eventDispatcher
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->willReturnCallback(
                 static function (IsRetryableEvent $event) use ($envelope) {
@@ -75,7 +75,7 @@ class EventDrivenRetryStrategyTest extends TestCase
         $envelope = new Envelope(new \stdClass());
 
         $this->eventDispatcher
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->willReturnCallback(
                 static function (IsRetryableEvent $event) use ($envelope) {
@@ -96,7 +96,7 @@ class EventDrivenRetryStrategyTest extends TestCase
         $envelope = new Envelope(new \stdClass());
 
         $this->eventDispatcher
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->willReturnCallback(
                 static function (IsRetryableEvent $event) use ($envelope) {
@@ -112,7 +112,7 @@ class EventDrivenRetryStrategyTest extends TestCase
             'fallbackRetryStrategy',
             RetryStrategyInterface::class,
         )
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('isRetryable')
             ->with($envelope)
             ->willReturn(true)
@@ -126,7 +126,7 @@ class EventDrivenRetryStrategyTest extends TestCase
         $envelope = new Envelope(new \stdClass());
 
         $this->eventDispatcher
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->willReturnCallback(
                 static function (GetWaitingTimeEvent $event) use ($envelope) {
@@ -148,7 +148,7 @@ class EventDrivenRetryStrategyTest extends TestCase
         $envelope = new Envelope(new \stdClass());
 
         $this->eventDispatcher
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->willReturnCallback(
                 static function (GetWaitingTimeEvent $event) use ($envelope) {
@@ -172,7 +172,7 @@ class EventDrivenRetryStrategyTest extends TestCase
         $envelope = new Envelope(new \stdClass());
 
         $this->eventDispatcher
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->willReturnCallback(
                 static function (GetWaitingTimeEvent $event) use ($envelope) {
@@ -188,7 +188,7 @@ class EventDrivenRetryStrategyTest extends TestCase
             'fallbackRetryStrategy',
             RetryStrategyInterface::class,
         )
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getWaitingTime')
             ->with($envelope)
             ->willReturn(5000)

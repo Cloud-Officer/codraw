@@ -44,7 +44,7 @@ class TokenProcessorTest extends TestCase
             $key = uniqid()
         );
 
-        $tokenStorage->expects(static::once())
+        $tokenStorage->expects($this->once())
             ->method('getToken')
             ->willReturn(
                 new NullToken()
@@ -108,7 +108,7 @@ class TokenProcessorTest extends TestCase
             $key = uniqid()
         );
 
-        $tokenStorage->expects(static::once())
+        $tokenStorage->expects($this->once())
             ->method('getToken')
             ->willReturn(
                 new UsernamePasswordToken(

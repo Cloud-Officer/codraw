@@ -162,7 +162,7 @@ class CommandFlowListenerTest extends TestCase
         );
 
         $command
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getName')
             ->willReturn('help')
         ;
@@ -188,7 +188,7 @@ class CommandFlowListenerTest extends TestCase
         );
 
         $command
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getName')
             ->willReturn(uniqid('command-'))
         ;
@@ -214,14 +214,14 @@ class CommandFlowListenerTest extends TestCase
         );
 
         $input
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('hasOption')
             ->with('help')
             ->willReturn(true)
         ;
 
         $input
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getOption')
             ->with('help')
             ->willReturn(true)
@@ -248,7 +248,7 @@ class CommandFlowListenerTest extends TestCase
         );
 
         $input
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('hasOption')
             ->with('help')
             ->willReturn(false)
@@ -275,13 +275,13 @@ class CommandFlowListenerTest extends TestCase
         );
 
         $connection
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('createSchemaManager')
             ->willReturn($schemaManager = $this->createMock(MySQLSchemaManager::class))
         ;
 
         $schemaManager
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('tablesExist')
             ->with(['command__execution'])
             ->willReturn(false)
@@ -308,7 +308,7 @@ class CommandFlowListenerTest extends TestCase
         );
 
         $connection
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('createSchemaManager')
             ->willThrowException(new ConnectionException())
         ;
@@ -334,7 +334,7 @@ class CommandFlowListenerTest extends TestCase
         );
 
         $input
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('hasOption')
             ->with($listener::OPTION_EXECUTION_ID)
             ->willReturn(false)
@@ -381,42 +381,42 @@ class CommandFlowListenerTest extends TestCase
         );
 
         $command
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getName')
             ->willReturn(uniqid('command-'))
         ;
 
         $input
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getArguments')
             ->willReturn([])
         ;
 
         $input
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getOptions')
             ->willReturn([])
         ;
 
         $connection
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('isConnectedToPrimary')
             ->willReturn(false)
         ;
 
         $connection
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('insert')
             ->willThrowException($error = new \Exception())
         ;
 
         $connection
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('ensureConnectedToReplica')
         ;
 
         $logger
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('error')
             ->with(
                 'Command flow listener error while generating execution id',
@@ -445,31 +445,31 @@ class CommandFlowListenerTest extends TestCase
         );
 
         $command
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getName')
             ->willReturn($commandName = uniqid('command-'))
         ;
 
         $input
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getArguments')
             ->willReturn(['keyName' => 'keyValue'])
         ;
 
         $input
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getOptions')
             ->willReturn(['null' => null, 'zero' => 0, 'false' => false, 'other' => 'value'])
         ;
 
         $connection
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('isConnectedToPrimary')
             ->willReturn(false)
         ;
 
         $connection
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('insert')
             ->with(
                 'command__execution',
@@ -520,7 +520,7 @@ class CommandFlowListenerTest extends TestCase
         ;
 
         $connection
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('ensureConnectedToReplica')
         ;
 
@@ -545,19 +545,19 @@ class CommandFlowListenerTest extends TestCase
         );
 
         $command
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getName')
             ->willReturn(uniqid('command-'))
         ;
 
         $input
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getArguments')
             ->willReturn([])
         ;
 
         $input
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getOptions')
             ->willReturn([])
         ;
@@ -581,7 +581,7 @@ class CommandFlowListenerTest extends TestCase
         );
 
         $eventDispatcher
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->willReturnArgument(0)
         ;
@@ -593,7 +593,7 @@ class CommandFlowListenerTest extends TestCase
         );
 
         $command
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('getDefinition')
         ;
 
@@ -610,7 +610,7 @@ class CommandFlowListenerTest extends TestCase
         );
 
         $eventDispatcher
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->with(
                 static::callback(static function (LoadExecutionIdEvent $event) use ($execution) {
@@ -629,7 +629,7 @@ class CommandFlowListenerTest extends TestCase
         );
 
         $command
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getDefinition')
             ->willReturn($definition = new InputDefinition())
         ;
@@ -659,18 +659,18 @@ class CommandFlowListenerTest extends TestCase
         );
 
         $connection
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('isConnectedToPrimary')
             ->willReturn(false)
         ;
 
         $connection
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('ensureConnectedToReplica')
         ;
 
         $connection
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('executeStatement')
         ;
 
@@ -700,7 +700,7 @@ class CommandFlowListenerTest extends TestCase
         );
 
         $output
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('fetch')
         ;
 
@@ -724,7 +724,7 @@ class CommandFlowListenerTest extends TestCase
         );
 
         $output
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('fetch')
             ->willReturn($output = uniqid('output-'))
         ;
@@ -754,7 +754,7 @@ class CommandFlowListenerTest extends TestCase
         );
 
         $output
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('fetch')
             ->willReturn(str_repeat('Z', 50001))
         ;
@@ -788,7 +788,7 @@ class CommandFlowListenerTest extends TestCase
         );
 
         $eventDispatcher
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('dispatch')
         ;
 
@@ -812,7 +812,7 @@ class CommandFlowListenerTest extends TestCase
         );
 
         $command
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getApplication')
             ->willReturn($application = $this->createMock(Application::class))
         ;
@@ -820,7 +820,7 @@ class CommandFlowListenerTest extends TestCase
         $outputString = uniqid('output-string-');
 
         $application
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('renderThrowable')
             ->with(
                 $error,
@@ -833,7 +833,7 @@ class CommandFlowListenerTest extends TestCase
         ;
 
         $eventDispatcher
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->with(
                 static::callback(function (CommandErrorEvent $event) use ($execution, $outputString) {
@@ -872,7 +872,7 @@ class CommandFlowListenerTest extends TestCase
 
         $reason = uniqid('reason-');
         $eventDispatcher
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->with(
                 static::callback(static function (CommandErrorEvent $event) use ($reason) {
@@ -913,7 +913,7 @@ class CommandFlowListenerTest extends TestCase
         );
 
         $output
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('fetch')
             ->willReturn(uniqid('output-'))
         ;
@@ -942,7 +942,7 @@ class CommandFlowListenerTest extends TestCase
         );
 
         $output
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('fetch')
             ->willReturn(uniqid('output-'))
         ;
@@ -963,14 +963,14 @@ class CommandFlowListenerTest extends TestCase
         $input = $this->createMock(InputInterface::class);
 
         $input
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('hasOption')
             ->with($listener::OPTION_EXECUTION_ID)
             ->willReturn(true)
         ;
 
         $input
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getOption')
             ->with($listener::OPTION_EXECUTION_ID)
             ->willReturn($id)

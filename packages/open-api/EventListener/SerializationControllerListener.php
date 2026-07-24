@@ -34,7 +34,7 @@ class SerializationControllerListener implements EventSubscriberInterface
             return;
         }
 
-        $className = self::getRealClass($controller[0]::class);
+        $className = static::getRealClass($controller[0]::class);
         $object = new \ReflectionClass($className);
         $method = $object->getMethod($controller[1]);
 
@@ -43,7 +43,7 @@ class SerializationControllerListener implements EventSubscriberInterface
         $event->getRequest()->attributes->set('_draw_open_api_serialization', $attribute?->newInstance() ?? new Serialization());
     }
 
-    private static function getRealClass(string $class): string
+    protected static function getRealClass(string $class): string
     {
         if (class_exists(Proxy::class)) {
             if (false === $pos = strrpos($class, '\\'.Proxy::MARKER.'\\')) {

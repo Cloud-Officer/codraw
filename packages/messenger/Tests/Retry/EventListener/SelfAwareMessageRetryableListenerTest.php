@@ -37,7 +37,7 @@ class SelfAwareMessageRetryableListenerTest extends TestCase
     public function testOnIsRetryableEventNotRetryable(): void
     {
         $message = $this->createMock(SelfAwareRetryableMessageInterface::class);
-        $message->expects(static::once())
+        $message->expects($this->once())
             ->method('getRetryWaitingTime')
             ->willReturn(null)
         ;
@@ -56,7 +56,7 @@ class SelfAwareMessageRetryableListenerTest extends TestCase
     public function testOnIsRetryableEventRetryable(): void
     {
         $message = $this->createMock(SelfAwareRetryableMessageInterface::class);
-        $message->expects(static::once())
+        $message->expects($this->once())
             ->method('getRetryWaitingTime')
             ->with(
                 static::isInstanceOf(Envelope::class),
@@ -91,7 +91,7 @@ class SelfAwareMessageRetryableListenerTest extends TestCase
     public function testOnGetWaitingTimeEventWithWaitingTime(): void
     {
         $message = $this->createMock(SelfAwareRetryableMessageInterface::class);
-        $message->expects(static::once())
+        $message->expects($this->once())
             ->method('getRetryWaitingTime')
             ->willReturn(1000)
         ;
@@ -112,7 +112,7 @@ class SelfAwareMessageRetryableListenerTest extends TestCase
     public function testReset(): void
     {
         $message = $this->createMock(SelfAwareRetryableMessageInterface::class);
-        $message->expects(static::once())
+        $message->expects($this->once())
             ->method('getRetryWaitingTime')
             ->willReturn(1000)
         ;

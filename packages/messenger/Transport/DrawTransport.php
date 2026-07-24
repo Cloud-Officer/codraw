@@ -166,9 +166,9 @@ class DrawTransport extends DoctrineTransport implements PurgeableTransportInter
                 $body,
                 json_encode($headers, \JSON_THROW_ON_ERROR),
                 $this->connection->getConfiguration()['queue_name'],
-                self::formatDateTime($now),
-                self::formatDateTime($availableAt),
-                self::formatDateTime($expiresAt),
+                static::formatDateTime($now),
+                static::formatDateTime($availableAt),
+                static::formatDateTime($expiresAt),
             ]);
 
         if ($tags) {
@@ -187,7 +187,7 @@ class DrawTransport extends DoctrineTransport implements PurgeableTransportInter
         return $id;
     }
 
-    private static function formatDateTime(?\DateTimeInterface $dateTime): ?string
+    protected static function formatDateTime(?\DateTimeInterface $dateTime): ?string
     {
         return $dateTime?->format('Y-m-d\TH:i:s');
     }

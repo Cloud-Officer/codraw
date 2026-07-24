@@ -40,7 +40,7 @@ class AutowireServiceMockTest extends WebTestCase implements AutowiredInterface
     public function testUsersAction(): void
     {
         $this->entityHandlerMock
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('findAll')
             ->with(User::class)
             ->willReturn([])

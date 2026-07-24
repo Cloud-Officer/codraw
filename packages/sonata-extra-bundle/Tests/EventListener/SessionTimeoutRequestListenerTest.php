@@ -65,13 +65,13 @@ class SessionTimeoutRequestListenerTest extends TestCase
 
         $request->setSession($session = $this->createMock(Session::class));
 
-        $session->expects(static::once())
+        $session->expects($this->once())
             ->method('get')
             ->with('draw_sonata_integration_last_used')
             ->willReturn(time() - 3601)
         ;
 
-        $session->expects(static::once())
+        $session->expects($this->once())
             ->method('invalidate')
         ;
 
@@ -264,12 +264,12 @@ class SessionTimeoutRequestListenerTest extends TestCase
 
         $response->setContent('<meta data-sonata-admin/><title>value</title>');
 
-        $security->expects(static::once())
+        $security->expects($this->once())
             ->method('getUser')
             ->willReturn(static::createStub(UserInterface::class))
         ;
 
-        $urlGenerator->expects(static::exactly(2))
+        $urlGenerator->expects($this->exactly(2))
             ->method('generate')
             ->with(
                 ...static::withConsecutive(
@@ -307,12 +307,12 @@ class SessionTimeoutRequestListenerTest extends TestCase
             $urlGenerator = $this->createMock(UrlGeneratorInterface::class),
         );
 
-        $security->expects(static::once())
+        $security->expects($this->once())
             ->method('getUser')
             ->willReturn($user)
         ;
 
-        $urlGenerator->expects(static::never())
+        $urlGenerator->expects($this->never())
             ->method('generate')
         ;
 
@@ -355,6 +355,7 @@ class SessionTimeoutRequestListenerTest extends TestCase
                 return null;
             }
 
+            #[\Deprecated]
             public function eraseCredentials(): void
             {
             }
@@ -366,7 +367,7 @@ class SessionTimeoutRequestListenerTest extends TestCase
 
             public function getUserIdentifier(): string
             {
-                return '';
+                return uniqid('id-');
             }
         };
 

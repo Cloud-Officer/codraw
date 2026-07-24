@@ -216,7 +216,7 @@ class ExecutionTest extends TestCase
 
         $event = $this->createMock(PreUpdateEventArgs::class);
 
-        $event->expects(static::once())
+        $event->expects($this->once())
             ->method('hasChangedField')
             ->with('updatedAt')
             ->willReturn(true)

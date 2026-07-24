@@ -158,7 +158,7 @@ class PreventDeleteRelationLoader
                 $metadatas[] = $metadata;
 
                 foreach ($metadata->associationMappings as $key => $associationMapping) {
-                    $associationIdentifiers[self::getAssociationIdentifier($metadata->getName(), $key)] = true;
+                    $associationIdentifiers[static::getAssociationIdentifier($metadata->getName(), $key)] = true;
                 }
             }
         }
@@ -184,7 +184,7 @@ class PreventDeleteRelationLoader
                 if (
                     null !== $parentClass
                     && \array_key_exists(
-                        self::getAssociationIdentifier($parentClass, $associationMapping->fieldName),
+                        static::getAssociationIdentifier($parentClass, $associationMapping->fieldName),
                         $associationIdentifiers
                     )
                 ) {
@@ -320,7 +320,7 @@ class PreventDeleteRelationLoader
         return $attributes;
     }
 
-    private static function getAssociationIdentifier(string $class, string $associationName): string
+    protected static function getAssociationIdentifier(string $class, string $associationName): string
     {
         return \sprintf('%s::%s', $class, $associationName);
     }

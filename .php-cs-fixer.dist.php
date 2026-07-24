@@ -6,6 +6,7 @@ $finder = (new \PhpCsFixer\Finder)
     ->exclude('bin')
     ->exclude('packages/fixer/Tests/fixtures/ClassPrivateStaticCallFixerTest')
     ->exclude('packages/fixer/Tests/fixtures/ClassStaticCallFixerTest')
+    ->notPath('config/reference.php')
 ;
 
 $config = (new \PhpCsFixer\Config())
@@ -32,6 +33,9 @@ $config = (new \PhpCsFixer\Config())
         'php_unit_test_class_requires_covers' => false, // @PhpCsFixer use default 'true' putting covers nothing by default
         'declare_strict_types' => false,
         'attribute_block_no_spaces' => false,
+        'php_unit_test_case_static_method_calls' => [
+            'target' => 'newest',
+        ],
     ])
     ->setFinder($finder);
 ;

@@ -37,13 +37,13 @@ class EventDrivenUserCheckerTest extends TestCase
         $user = static::createStub(UserInterface::class);
 
         $this->decoratedUserChecker
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('checkPreAuth')
             ->with($user)
         ;
 
         $this->eventDispatcher
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->with(
                 static::callback(function (CheckPreAuthEvent $event) use ($user) {
@@ -66,13 +66,13 @@ class EventDrivenUserCheckerTest extends TestCase
         $user = static::createStub(UserInterface::class);
 
         $this->decoratedUserChecker
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('checkPostAuth')
             ->with($user)
         ;
 
         $this->eventDispatcher
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->with(
                 static::callback(function (CheckPostAuthEvent $event) use ($user) {

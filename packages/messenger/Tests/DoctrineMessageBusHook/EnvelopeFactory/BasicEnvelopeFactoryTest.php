@@ -43,7 +43,7 @@ class BasicEnvelopeFactoryTest extends TestCase
         $newEnvelope = new Envelope($messages[0]);
 
         $this->eventDispatcher
-            ->expects(static::exactly(2))
+            ->expects($this->exactly(2))
             ->method('dispatch')
             ->with(
                 ...static::withConsecutive(

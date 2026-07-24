@@ -61,7 +61,7 @@ class ResponseSerializerListenerTest extends TestCase
         );
 
         $serializationContextFactory
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('createSerializationContext')
         ;
 
@@ -87,7 +87,7 @@ class ResponseSerializerListenerTest extends TestCase
         $request->setRequestFormat('html');
 
         $serializationContextFactory
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('createSerializationContext')
         ;
 
@@ -113,7 +113,7 @@ class ResponseSerializerListenerTest extends TestCase
         $request->setRequestFormat('json');
 
         $serializationContextFactory
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('createSerializationContext')
         ;
 
@@ -144,7 +144,7 @@ class ResponseSerializerListenerTest extends TestCase
         $request->setRequestFormat('json');
 
         $serializationContextFactory
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('createSerializationContext')
             ->willReturn($context = new SerializationContext())
         ;
@@ -160,7 +160,7 @@ class ResponseSerializerListenerTest extends TestCase
         );
 
         $eventDispatcher
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->with(
                 static::callback(
@@ -202,7 +202,7 @@ class ResponseSerializerListenerTest extends TestCase
         ;
 
         $serializer
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('serialize')
             ->with($result, 'json', $context)
             ->willReturn($jsonResult = json_encode(['key' => uniqid('value-')], \JSON_THROW_ON_ERROR))
@@ -249,13 +249,13 @@ class ResponseSerializerListenerTest extends TestCase
         $headers = ['key' => 'value'];
 
         $responseHeaderBag
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('add')
             ->with($headers)
         ;
 
         $headerBag
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('allPreserveCase')
             ->willReturn($headers)
         ;
@@ -299,7 +299,7 @@ class ResponseSerializerListenerTest extends TestCase
         );
 
         $responseHeaderBag
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('set')
             ->with(
                 $key = uniqid('key-'),

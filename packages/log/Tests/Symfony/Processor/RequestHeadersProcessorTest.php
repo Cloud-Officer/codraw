@@ -31,13 +31,13 @@ class RequestHeadersProcessorTest extends TestCase
 
         if (null === $requestHeaders) {
             $requestStack
-                ->expects(static::once())
+                ->expects($this->once())
                 ->method('getMainRequest')
                 ->willReturn(null)
             ;
         } else {
             $requestStack
-                ->expects(static::once())
+                ->expects($this->once())
                 ->method('getMainRequest')
                 ->willReturn($mainRequest = new Request())
             ;

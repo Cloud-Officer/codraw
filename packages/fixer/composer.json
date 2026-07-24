@@ -33,6 +33,6 @@
         }
     },
     "replace": {
-        "draw/fixer": "self.version"
+        "codraw/fixer": "self.version"
     }
 }

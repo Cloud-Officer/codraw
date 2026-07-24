@@ -52,7 +52,7 @@ class SlowRequestLoggerTest extends TestCase
         );
 
         $requestMatcher
-            ->expects(static::exactly(2))
+            ->expects($this->exactly(2))
             ->method('matches')
             ->with($request = new Request())
             ->willReturn(true)
@@ -65,7 +65,7 @@ class SlowRequestLoggerTest extends TestCase
         );
 
         $logger
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('log')
             ->with(
                 LogLevel::WARNING,
@@ -112,7 +112,7 @@ class SlowRequestLoggerTest extends TestCase
         );
 
         $requestMatcher
-            ->expects(static::exactly(2))
+            ->expects($this->exactly(2))
             ->method('matches')
             ->with($request = new Request())
             ->willReturn(false)
@@ -125,7 +125,7 @@ class SlowRequestLoggerTest extends TestCase
         );
 
         $logger
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('log')
         ;
 

@@ -95,7 +95,7 @@ class InstallSandboxCommandTest extends TestCase
         );
 
         $filesystem
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('dumpFile')
         ;
 

@@ -41,12 +41,12 @@ class RoleRestrictedAuthenticatorListenerTest extends TestCase
         );
 
         $roleHierarchy
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('getReachableRoleNames')
         ;
 
         $user
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('getRoles')
         ;
 
@@ -64,13 +64,13 @@ class RoleRestrictedAuthenticatorListenerTest extends TestCase
         );
 
         $user
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getRoles')
             ->willReturn($roles = ['ROLE_USER'])
         ;
 
         $roleHierarchy
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getReachableRoleNames')
             ->with($roles)
             ->willReturn($roles)
@@ -93,13 +93,13 @@ class RoleRestrictedAuthenticatorListenerTest extends TestCase
         );
 
         $user
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getRoles')
             ->willReturn($roles = ['ROLE_USER'])
         ;
 
         $roleHierarchy
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getReachableRoleNames')
             ->with($roles)
             ->willReturn([...$roles, ...[$role = uniqid('ROLE_')]])

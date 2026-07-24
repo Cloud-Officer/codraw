@@ -75,7 +75,7 @@ class EmailComposerTest extends TestCase
         $object->addWriter(uniqid('other-class-'), uniqid('writer-'), uniqid('method-'));
 
         $serviceLocator
-            ->expects(static::exactly(2))
+            ->expects($this->exactly(2))
             ->method('get')
             ->with(
                 ...static::withConsecutive(
@@ -89,7 +89,7 @@ class EmailComposerTest extends TestCase
         ;
 
         $emailWriter
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('method1')
             ->with(
                 $message,
@@ -98,7 +98,7 @@ class EmailComposerTest extends TestCase
         ;
 
         $emailWriter
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('method2')
             ->with(
                 $message,
@@ -161,7 +161,7 @@ class EmailComposerTest extends TestCase
         );
 
         $serviceLocator
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('get')
         ;
 
@@ -186,13 +186,13 @@ class EmailComposerTest extends TestCase
         };
 
         $translator
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getLocale')
             ->willReturn('en')
         ;
 
         $translator
-            ->expects(static::exactly(2))
+            ->expects($this->exactly(2))
             ->method('setLocale')
             ->with(
                 ...static::withConsecutive(

@@ -48,7 +48,7 @@ class ExactMatchColumnExtractorTest extends TestCase
         );
 
         $importer
-            ->expects(static::never())
+            ->expects($this->never())
             ->method('getOptions')
         ;
 
@@ -69,7 +69,7 @@ class ExactMatchColumnExtractorTest extends TestCase
         );
 
         $importer
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getOptions')
             ->willReturn(['headerName1', 'headerName2'])
         ;
@@ -90,7 +90,7 @@ class ExactMatchColumnExtractorTest extends TestCase
         );
 
         $importer
-            ->expects(static::once())
+            ->expects($this->once())
             ->method('getOptions')
             ->willReturn(['headerName'])
         ;
