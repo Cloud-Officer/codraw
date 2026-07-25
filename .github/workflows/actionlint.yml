@@ -24,7 +24,7 @@ jobs:
         with:
           # https://github.com/rhysd/actionlint
           #actionlint_flags:
-          fail_on_error: true
+          fail_level: any
           filter_mode: nofilter
           github_token: ${{ secrets.GITHUB_TOKEN }}
           level: info

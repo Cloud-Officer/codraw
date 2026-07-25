@@ -2,12 +2,8 @@ name: Split
 
 on:
   push:
-    branches:
-      - 'master'
-
     tags:
       - '*'
-
 jobs:
   split:
     runs-on: ubuntu-latest
