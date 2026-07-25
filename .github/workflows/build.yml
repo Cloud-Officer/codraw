@@ -32,7 +32,6 @@ jobs:
           - "27017:27017"
         options: |
           --health-cmd "mongo --eval 'db.runCommand({ connectionStatus: 1 })'"
-
     env:
       DATABASE_URL: 'mysql://root@127.0.0.1:3306/draw'
       MONGODB_URL: 'mongodb://127.0.0.1'
@@ -42,8 +41,7 @@ jobs:
         php-versions: ['8.5']
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-
+        uses: actions/checkout@v5
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -62,14 +60,13 @@ jobs:
         id: composer-cache
         run: echo "dir=$(composer config cache-files-dir)" >> "${GITHUB_OUTPUT}"
       - name: Composer Cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-v3-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
       - name: Build
         run: |
-
           echo "::group::Install"
           composer install --optimize-autoloader --no-interaction --prefer-dist
           bin/console assets:install ./public --no-interaction
