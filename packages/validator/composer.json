@@ -34,6 +34,6 @@
         }
     },
     "replace": {
-        "codraw/validator": "self.version"
+        "draw/validator": "self.version"
     }
 }

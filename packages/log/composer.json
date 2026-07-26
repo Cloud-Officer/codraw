@@ -41,6 +41,6 @@
         }
     },
     "replace": {
-        "codraw/log": "self.version"
+        "draw/log": "self.version"
     }
 }

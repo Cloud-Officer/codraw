@@ -39,6 +39,6 @@
         }
     },
     "replace": {
-        "codraw/entity-migrator": "self.version"
+        "draw/entity-migrator": "self.version"
     }
 }

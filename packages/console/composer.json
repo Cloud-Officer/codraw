@@ -37,6 +37,6 @@
         }
     },
     "replace": {
-        "codraw/console": "self.version"
+        "draw/console": "self.version"
     }
 }

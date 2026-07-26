@@ -47,6 +47,6 @@
         }
     },
     "replace": {
-        "codraw/tester": "self.version"
+        "draw/tester": "self.version"
     }
 }

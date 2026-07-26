@@ -51,6 +51,6 @@
         }
     },
     "replace": {
-        "codraw/sonata-extra-bundle": "self.version"
+        "draw/sonata-extra-bundle": "self.version"
     }
 }

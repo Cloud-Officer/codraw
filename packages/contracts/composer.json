@@ -24,6 +24,6 @@
         }
     },
     "replace": {
-        "codraw/contracts": "self.version"
+        "draw/contracts": "self.version"
     }
 }

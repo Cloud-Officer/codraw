@@ -43,6 +43,6 @@
         }
     },
     "replace": {
-        "codraw/application": "self.version"
+        "draw/application": "self.version"
     }
 }

@@ -43,6 +43,6 @@
         }
     },
     "replace": {
-        "codraw/sonata-import-bundle": "self.version"
+        "draw/sonata-import-bundle": "self.version"
     }
 }

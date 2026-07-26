@@ -33,6 +33,6 @@
         }
     },
     "replace": {
-        "codraw/graphviz": "self.version"
+        "draw/graphviz": "self.version"
     }
 }

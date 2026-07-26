@@ -47,6 +47,6 @@
         }
     },
     "replace": {
-        "codraw/cron-job": "self.version"
+        "draw/cron-job": "self.version"
     }
 }

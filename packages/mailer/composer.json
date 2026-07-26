@@ -38,6 +38,6 @@
         }
     },
     "replace": {
-        "codraw/mailer": "self.version"
+        "draw/mailer": "self.version"
     }
 }

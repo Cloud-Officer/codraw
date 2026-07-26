@@ -38,6 +38,6 @@
         }
     },
     "replace": {
-        "codraw/open-api": "self.version"
+        "draw/open-api": "self.version"
     }
 }

@@ -56,6 +56,6 @@
         }
     },
     "replace": {
-        "codraw/user-bundle": "self.version"
+        "draw/user-bundle": "self.version"
     }
 }

@@ -44,6 +44,6 @@
         }
     },
     "replace": {
-        "codraw/security": "self.version"
+        "draw/security": "self.version"
     }
 }
