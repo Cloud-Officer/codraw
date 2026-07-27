@@ -7,27 +7,24 @@ namespace Draw\Bundle\AwsSecretsBundle\Tests;
 use Draw\Bundle\AwsSecretsBundle\AwsSecretsEnvVarProcessor;
 use Draw\Bundle\AwsSecretsBundle\Provider\AwsSecretsEnvVarProviderInterface;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * @internal
  */
 class AwsSecretsEnvVarProcessorTest extends TestCase
 {
-    use ProphecyTrait;
+    private AwsSecretsEnvVarProcessor $processor;
 
-    /** @var AwsSecretsEnvVarProcessor */
-    private $processor;
-    /** @var AwsSecretsEnvVarProviderInterface */
-    private $provider;
+    private AwsSecretsEnvVarProviderInterface&MockObject $provider;
 
     protected function setUp(): void
     {
-        $this->provider = $this->prophesize(AwsSecretsEnvVarProviderInterface::class);
+        $this->provider = $this->createMock(AwsSecretsEnvVarProviderInterface::class);
 
         $this->processor = new AwsSecretsEnvVarProcessor(
-            $this->provider->reveal(),
+            $this->provider,
             false,
             ','
         );
@@ -55,7 +52,11 @@ class AwsSecretsEnvVarProcessorTest extends TestCase
     #[Test]
     public function itReturnsStringForKey(): void
     {
-        $this->provider->get('prefix/db')->willReturn('{"key":"value"}');
+        $this->provider->expects($this->once())
+            ->method('get')
+            ->with('prefix/db')
+            ->willReturn('{"key":"value"}')
+        ;
 
         $callCount = 0;
         $value = $this->processor->getEnv(
@@ -77,7 +78,11 @@ class AwsSecretsEnvVarProcessorTest extends TestCase
     public function itReturnsString(): void
     {
         $callCount = 0;
-        $this->provider->get('prefix/db')->willReturn('value');
+        $this->provider->expects($this->once())
+            ->method('get')
+            ->with('prefix/db')
+            ->willReturn('value')
+        ;
 
         $value = $this->processor->getEnv(
             'aws',

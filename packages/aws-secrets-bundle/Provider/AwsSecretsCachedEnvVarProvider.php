@@ -35,11 +35,9 @@ class AwsSecretsCachedEnvVarProvider implements AwsSecretsEnvVarProviderInterfac
 
         $value = $this->decorated->get($name);
 
-        if (isset($cacheItem)) {
-            $cacheItem->set($value);
-            $cacheItem->expiresAfter($this->ttl);
-            $this->cacheItemPool->save($cacheItem);
-        }
+        $cacheItem->set($value);
+        $cacheItem->expiresAfter($this->ttl);
+        $this->cacheItemPool->save($cacheItem);
 
         return $value;
     }

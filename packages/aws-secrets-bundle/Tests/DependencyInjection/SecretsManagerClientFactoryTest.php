@@ -2,7 +2,6 @@
 
 namespace Draw\Bundle\AwsSecretsBundle\Tests\DependencyInjection;
 
-use Aws\SecretsManager\SecretsManagerClient;
 use Draw\Bundle\AwsSecretsBundle\DependencyInjection\SecretsManagerClientFactory;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -51,7 +50,7 @@ class SecretsManagerClientFactoryTest extends TestCase
             null,
             null
         );
-        static::assertInstanceOf(SecretsManagerClient::class, $client);
+        static::assertSame('region', $client->getRegion());
     }
 
     #[Test]
@@ -65,7 +64,10 @@ class SecretsManagerClientFactoryTest extends TestCase
             'key',
             'secret'
         );
-        static::assertInstanceOf(SecretsManagerClient::class, $client);
+        $credentials = $client->getCredentials()->wait();
+
+        static::assertSame('key', $credentials->getAccessKeyId());
+        static::assertSame('secret', $credentials->getSecretKey());
     }
 
     #[Test]
@@ -79,6 +81,6 @@ class SecretsManagerClientFactoryTest extends TestCase
             null,
             null
         );
-        static::assertInstanceOf(SecretsManagerClient::class, $client);
+        static::assertSame('http://my-endpoint.example.com:4566', (string) $client->getEndpoint());
     }
 }

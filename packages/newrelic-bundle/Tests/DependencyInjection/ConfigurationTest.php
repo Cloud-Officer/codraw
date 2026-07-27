@@ -7,6 +7,7 @@ namespace Draw\Bundle\NewRelicBundle\Tests\DependencyInjection;
 use Draw\Bundle\NewRelicBundle\DependencyInjection\Configuration;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Config\Definition\ArrayNode;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\Definition\PrototypedArrayNode;
 
@@ -21,12 +22,12 @@ class ConfigurationTest extends TestCase
         $rootNode = $configuration->getConfigTreeBuilder()
             ->buildTree()
         ;
-        $children = $rootNode->getChildren();
+        static::assertInstanceOf(ArrayNode::class, $rootNode);
+        $httpNode = $rootNode->getChildren()['http'];
+        static::assertInstanceOf(ArrayNode::class, $httpNode);
 
-        /** @var PrototypedArrayNode $ignoredRoutesNode */
-        $ignoredRoutesNode = $children['http']->getChildren()['ignored_routes'];
-
-        static::assertInstanceOf('\Symfony\Component\Config\Definition\PrototypedArrayNode', $ignoredRoutesNode);
+        $ignoredRoutesNode = $httpNode->getChildren()['ignored_routes'];
+        static::assertInstanceOf(PrototypedArrayNode::class, $ignoredRoutesNode);
         static::assertFalse($ignoredRoutesNode->isRequired());
         static::assertEmpty($ignoredRoutesNode->getDefaultValue());
 
@@ -41,12 +42,12 @@ class ConfigurationTest extends TestCase
         $rootNode = $configuration->getConfigTreeBuilder()
             ->buildTree()
         ;
-        $children = $rootNode->getChildren();
+        static::assertInstanceOf(ArrayNode::class, $rootNode);
+        $httpNode = $rootNode->getChildren()['http'];
+        static::assertInstanceOf(ArrayNode::class, $httpNode);
 
-        /** @var PrototypedArrayNode $ignoredPathsNode */
-        $ignoredPathsNode = $children['http']->getChildren()['ignored_paths'];
-
-        static::assertInstanceOf('\Symfony\Component\Config\Definition\PrototypedArrayNode', $ignoredPathsNode);
+        $ignoredPathsNode = $httpNode->getChildren()['ignored_paths'];
+        static::assertInstanceOf(PrototypedArrayNode::class, $ignoredPathsNode);
         static::assertFalse($ignoredPathsNode->isRequired());
         static::assertEmpty($ignoredPathsNode->getDefaultValue());
 
@@ -61,12 +62,12 @@ class ConfigurationTest extends TestCase
         $rootNode = $configuration->getConfigTreeBuilder()
             ->buildTree()
         ;
-        $children = $rootNode->getChildren();
+        static::assertInstanceOf(ArrayNode::class, $rootNode);
+        $commandsNode = $rootNode->getChildren()['commands'];
+        static::assertInstanceOf(ArrayNode::class, $commandsNode);
 
-        /** @var PrototypedArrayNode $ignoredCommandsNode */
-        $ignoredCommandsNode = $children['commands']->getChildren()['ignored_commands'];
-
-        static::assertInstanceOf('\Symfony\Component\Config\Definition\PrototypedArrayNode', $ignoredCommandsNode);
+        $ignoredCommandsNode = $commandsNode->getChildren()['ignored_commands'];
+        static::assertInstanceOf(PrototypedArrayNode::class, $ignoredCommandsNode);
         static::assertFalse($ignoredCommandsNode->isRequired());
         static::assertEmpty($ignoredCommandsNode->getDefaultValue());
 

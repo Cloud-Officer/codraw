@@ -7,6 +7,7 @@ namespace Draw\Bundle\NewRelicBundle\Tests\Twig;
 use Draw\Bundle\NewRelicBundle\NewRelic\Config;
 use Draw\Bundle\NewRelicBundle\NewRelic\NewRelicInteractorInterface;
 use Draw\Bundle\NewRelicBundle\Twig\NewRelicExtension;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -14,15 +15,9 @@ use PHPUnit\Framework\TestCase;
  */
 class NewRelicExtensionTest extends TestCase
 {
-    /**
-     * @var Config
-     */
-    private $newRelic;
+    private Config&MockObject $newRelic;
 
-    /**
-     * @var NewRelicInteractorInterface
-     */
-    private $interactor;
+    private NewRelicInteractorInterface&MockObject $interactor;
 
     protected function setUp(): void
     {

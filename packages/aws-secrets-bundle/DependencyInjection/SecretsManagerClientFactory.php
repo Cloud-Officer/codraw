@@ -9,8 +9,6 @@ use Aws\SecretsManager\SecretsManagerClient;
 class SecretsManagerClientFactory
 {
     /**
-     * @param string|null $version
-     *
      * @throws \Exception
      */
     public static function createClient(
@@ -25,13 +23,18 @@ class SecretsManagerClientFactory
             'version' => $version,
         ];
 
-        if ($key && $secret) {
+        $hasKey = (bool) $key;
+        $hasSecret = (bool) $secret;
+
+        if ($hasKey !== $hasSecret) {
+            throw new \Exception('Both key and secret must be provided or neither');
+        }
+
+        if ($hasKey) {
             $config['credentials'] = [
                 'key' => $key,
                 'secret' => $secret,
             ];
-        } elseif (($key && !$secret) || (!$key && $secret)) {
-            throw new \Exception('Both key and secret must be provided or neither');
         }
 
         if ($endpoint) {

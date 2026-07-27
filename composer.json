@@ -92,7 +92,6 @@
         "monolog/monolog": "^3.5.0",
         "nelmio/cors-bundle": "^2.0",
         "pelago/emogrifier": "^8.0",
-        "phpspec/prophecy-phpunit": "^2.5",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan": "^2.2",
         "phpstan/phpstan-phpunit": "^2.0",

@@ -10,7 +10,6 @@ use Draw\Bundle\NewRelicBundle\NewRelic\NewRelicInteractorInterface;
 use Draw\Bundle\NewRelicBundle\TransactionNamingStrategy\TransactionNamingStrategyInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
@@ -44,8 +43,7 @@ class RequestListenerTest extends TestCase
 
         $kernel = static::createStub(HttpKernelInterface::class);
 
-        $eventClass = RequestEvent::class;
-        $event = new $eventClass($kernel, new Request(), HttpKernelInterface::MAIN_REQUEST, new Response());
+        $event = new RequestEvent($kernel, new Request(), HttpKernelInterface::MAIN_REQUEST);
 
         $listener = new RequestListener(new Config('App name', 'Token'), $interactor, [], [], $namingStrategy);
         $listener->setTransactionName($event);
@@ -61,8 +59,7 @@ class RequestListenerTest extends TestCase
         $kernel = static::createStub(HttpKernelInterface::class);
         $request = new Request([], [], [], [], [], ['REQUEST_URI' => '/ignored_path']);
 
-        $eventClass = RequestEvent::class;
-        $event = new $eventClass($kernel, $request, HttpKernelInterface::MAIN_REQUEST, new Response());
+        $event = new RequestEvent($kernel, $request, HttpKernelInterface::MAIN_REQUEST);
 
         $listener = new RequestListener(new Config('App name', 'Token'), $interactor, [], ['/ignored_path'], $namingStrategy);
         $listener->setIgnoreTransaction($event);
@@ -78,8 +75,7 @@ class RequestListenerTest extends TestCase
         $kernel = static::createStub(HttpKernelInterface::class);
         $request = new Request([], [], ['_route' => 'ignored_route']);
 
-        $eventClass = RequestEvent::class;
-        $event = new $eventClass($kernel, $request, HttpKernelInterface::MAIN_REQUEST, new Response());
+        $event = new RequestEvent($kernel, $request, HttpKernelInterface::MAIN_REQUEST);
 
         $listener = new RequestListener(new Config('App name', 'Token'), $interactor, ['ignored_route'], [], $namingStrategy);
         $listener->setIgnoreTransaction($event);
@@ -94,8 +90,7 @@ class RequestListenerTest extends TestCase
 
         $kernel = static::createStub(HttpKernelInterface::class);
 
-        $eventClass = RequestEvent::class;
-        $event = new $eventClass($kernel, new Request(), HttpKernelInterface::MAIN_REQUEST, new Response());
+        $event = new RequestEvent($kernel, new Request(), HttpKernelInterface::MAIN_REQUEST);
 
         $listener = new RequestListener(new Config('App name', 'Token'), $interactor, [], [], $namingStrategy, true);
         $listener->setApplicationName($event);
@@ -110,8 +105,7 @@ class RequestListenerTest extends TestCase
 
         $kernel = static::createStub(HttpKernelInterface::class);
 
-        $eventClass = RequestEvent::class;
-        $event = new $eventClass($kernel, new Request(), HttpKernelInterface::MAIN_REQUEST, new Response());
+        $event = new RequestEvent($kernel, new Request(), HttpKernelInterface::MAIN_REQUEST);
 
         $listener = new RequestListener(new Config('App name', 'Token'), $interactor, [], [], $namingStrategy, false);
         $listener->setApplicationName($event);
