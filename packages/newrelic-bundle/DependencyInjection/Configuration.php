@@ -1,0 +1,165 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Draw\Bundle\NewRelicBundle\DependencyInjection;
+
+use Psr\Log\LogLevel;
+use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use Twig\Environment;
+
+class Configuration implements ConfigurationInterface
+{
+    public function getConfigTreeBuilder(): TreeBuilder
+    {
+        $treeBuilder = new TreeBuilder('draw_new_relic');
+        $rootNode = $treeBuilder->getRootNode();
+
+        $rootNode
+            ->fixXmlConfig('deployment_name')
+            ->children()
+                ->booleanNode('enabled')->defaultTrue()->end()
+                ->scalarNode('interactor')->end()
+                ->booleanNode('twig')->defaultValue(class_exists(Environment::class))->end()
+                ->scalarNode('api_key')->defaultValue(null)->end()
+                ->scalarNode('api_host')->defaultValue(null)->end()
+                ->scalarNode('license_key')->defaultValue(null)->end()
+                ->scalarNode('application_name')->defaultValue(null)->end()
+                ->arrayNode('deployment_names')
+                    ->prototype('scalar')
+                    ->end()
+                    ->beforeNormalization()
+                        ->ifTrue(static fn ($v) => !\is_array($v))
+                        ->then(static fn ($v) => array_values(array_filter(explode(';', (string) $v))))
+                    ->end()
+                ->end()
+                ->scalarNode('xmit')->defaultValue(false)->end()
+                ->booleanNode('logging')
+                    ->info('Write logs to a PSR3 logger whenever we send data to NewRelic.')
+                    ->defaultFalse()
+                ->end()
+                ->arrayNode('exceptions')
+                    ->canBeDisabled()
+                ->end()
+                ->arrayNode('commands')
+                    ->canBeDisabled()
+                    ->children()
+                        ->arrayNode('ignored_commands')
+                            ->prototype('scalar')
+                            ->end()
+                            ->beforeNormalization()
+                                ->ifTrue(static fn ($v) => !\is_array($v))
+                                ->then(static fn ($v) => (array) $v)
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('deprecations')
+                    ->canBeDisabled()
+                ->end()
+                ->arrayNode('http')
+                    ->canBeDisabled()
+                    ->children()
+                        ->scalarNode('transaction_naming')
+                            ->defaultValue('route')
+                            ->validate()
+                                ->ifNotInArray(['route', 'controller', 'service'])
+                                ->thenInvalid('Invalid transaction naming scheme "%s", must be "route", "controller" or "service".')
+                            ->end()
+                        ->end()
+                        ->scalarNode('transaction_naming_service')->defaultNull()->end()
+                        ->arrayNode('ignored_routes')
+                            ->prototype('scalar')
+                            ->end()
+                            ->beforeNormalization()
+                                ->ifTrue(static fn ($v) => !\is_array($v))
+                                ->then(static fn ($v) => (array) $v)
+                            ->end()
+                        ->end()
+                        ->arrayNode('ignored_paths')
+                            ->prototype('scalar')
+                            ->end()
+                            ->beforeNormalization()
+                                ->ifTrue(static fn ($v) => !\is_array($v))
+                                ->then(static fn ($v) => (array) $v)
+                            ->end()
+                        ->end()
+                        ->scalarNode('using_symfony_cache')->defaultFalse()->end()
+                    ->end()
+                ->end()
+                ->booleanNode('instrument')
+                    ->defaultFalse()
+                ->end()
+                ->arrayNode('monolog')
+                    ->canBeEnabled()
+                    ->children()
+                        ->arrayNode('channels')
+                            ->fixXmlConfig('channel', 'elements')
+                            ->canBeUnset()
+                            ->beforeNormalization()
+                                ->ifString()
+                                ->then(static fn ($v) => ['elements' => [$v]])
+                            ->end()
+                            ->beforeNormalization()
+                                ->ifTrue(static fn ($v) => \is_array($v) && is_numeric(key($v)))
+                                ->then(static fn ($v) => ['elements' => $v])
+                            ->end()
+                            ->validate()
+                                ->ifTrue(static fn ($v) => empty($v))
+                                ->thenUnset()
+                            ->end()
+                            ->validate()
+                                ->always(static function ($v) {
+                                    $isExclusive = null;
+                                    if (isset($v['type'])) {
+                                        $isExclusive = 'exclusive' === $v['type'];
+                                    }
+
+                                    $elements = [];
+                                    foreach ($v['elements'] as $element) {
+                                        if (str_starts_with($element, '!')) {
+                                            if (false === $isExclusive) {
+                                                throw new InvalidConfigurationException('Cannot combine exclusive/inclusive definitions in channels list.');
+                                            }
+                                            $elements[] = substr($element, 1);
+                                            $isExclusive = true;
+                                        } else {
+                                            if (true === $isExclusive) {
+                                                throw new InvalidConfigurationException('Cannot combine exclusive/inclusive definitions in channels list');
+                                            }
+                                            $elements[] = $element;
+                                            $isExclusive = false;
+                                        }
+                                    }
+
+                                    if (!\count($elements)) {
+                                        return;
+                                    }
+
+                                    return ['type' => $isExclusive ? 'exclusive' : 'inclusive', 'elements' => $elements];
+                                })
+                            ->end()
+                                ->children()
+                                ->scalarNode('type')
+                                    ->validate()
+                                        ->ifNotInArray(['inclusive', 'exclusive'])
+                                        ->thenInvalid('The type of channels has to be inclusive or exclusive')
+                                    ->end()
+                                ->end()
+                                ->arrayNode('elements')
+                                    ->prototype('scalar')->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->scalarNode('level')->defaultValue(LogLevel::ERROR)->end()
+                        ->scalarNode('service')->defaultValue('draw.new_relic.monolog_handler')->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+
+        return $treeBuilder;
+    }
+}

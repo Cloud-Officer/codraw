@@ -13,6 +13,8 @@ parameters:
   	- packages/fixer/Tests/fixtures/*
   ignoreErrors:
       - '#Call to an undefined method Symfony\\Component\\HttpFoundation\\Session\\SessionInterface::getFlashBag\(\).#'
+      # The newrelic_* functions are provided by the New Relic PHP extension, which is not installed in CI.
+      - '#Function newrelic_[a-z_]+ not found.#'
       #- '#provideTestArgument\(\) return type has no value type specified in iterable type (iterable|array).#'
       #- '#provideTestOption\(\) return type has no value type specified in iterable type (iterable|array).#'
       #- '#getHandledMessages\(\) return type has no value type specified in iterable type (iterable|array).#'

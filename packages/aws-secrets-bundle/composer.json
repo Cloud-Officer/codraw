@@ -1,0 +1,47 @@
+{
+    "name": "codraw/aws-secrets-bundle",
+    "description": "Use AWS Secrets Manager secrets as service container parameters in Symfony",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "draw",
+        "bundle",
+        "symfony"
+    ],
+    "authors": [
+        {
+            "name": "Martin Poirier Theoret",
+            "email": "mpoiriert@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.5",
+        "ext-json": "*",
+        "psr/cache": "^2.0 || ^3.0",
+        "symfony/cache": "^7.4.0",
+        "symfony/config": "^7.4.0",
+        "symfony/dependency-injection": "^7.4.0",
+        "symfony/http-kernel": "^7.4.0"
+    },
+    "require-dev": {
+        "aws/aws-sdk-php": "^3.171",
+        "phpspec/prophecy-phpunit": "^2.5",
+        "phpunit/phpunit": "^12.5",
+        "symfony/framework-bundle": "^7.4.0"
+    },
+    "suggest": {
+        "aws/aws-sdk-php": "Required to talk to AWS Secrets Manager"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Draw\\Bundle\\AwsSecretsBundle\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.38-dev"
+        }
+    }
+}

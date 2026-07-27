@@ -88,9 +88,11 @@
         "endroid/qr-code": "^6.0",
         "ext-pcntl": "*",
         "firebase/php-jwt": "^6.1",
+        "matthiasnoback/symfony-dependency-injection-test": "^6.3",
         "monolog/monolog": "^3.5.0",
         "nelmio/cors-bundle": "^2.0",
         "pelago/emogrifier": "^8.0",
+        "phpspec/prophecy-phpunit": "^2.5",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan": "^2.2",
         "phpstan/phpstan-phpunit": "^2.0",
@@ -129,6 +131,7 @@
     },
     "replace": {
         "codraw/application": "self.version",
+        "codraw/aws-secrets-bundle": "self.version",
         "codraw/aws-tool-kit": "self.version",
         "codraw/console": "self.version",
         "codraw/contracts": "self.version",
@@ -143,6 +146,7 @@
         "codraw/log": "self.version",
         "codraw/mailer": "self.version",
         "codraw/messenger": "self.version",
+        "codraw/newrelic-bundle": "self.version",
         "codraw/open-api": "self.version",
         "codraw/open-api-bundle": "self.version",
         "codraw/process": "self.version",
@@ -182,7 +186,9 @@
             "config/"
         ],
         "psr-4": {
+            "Draw\\Bundle\\AwsSecretsBundle\\": "packages/aws-secrets-bundle/",
             "Draw\\Bundle\\FrameworkExtraBundle\\": "packages/framework-extra-bundle/",
+            "Draw\\Bundle\\NewRelicBundle\\": "packages/newrelic-bundle/",
             "Draw\\Bundle\\SonataExtraBundle\\": "packages/sonata-extra-bundle/",
             "Draw\\Bundle\\SonataImportBundle\\": "packages/sonata-import-bundle/",
             "Draw\\Bundle\\SonataIntegrationBundle\\": "packages/sonata-integration-bundle/",
