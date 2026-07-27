@@ -80,6 +80,7 @@ class DrawAwsSecretsExtension extends Extension
             ->setArgument('$ignore', $container->getParameter('draw.aws_secrets.ignore'))
             ->setArgument('$delimiter', $container->getParameter('draw.aws_secrets.delimiter'))
             ->setPublic(false)
-            ->addTag('container.env_var_processor');
+            ->addTag('container.env_var_processor')
+        ;
     }
 }
