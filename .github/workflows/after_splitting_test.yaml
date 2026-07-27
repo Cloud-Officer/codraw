@@ -15,6 +15,7 @@ jobs:
       matrix:
         package_name:
           - application
+          - aws-secrets-bundle
           - aws-tool-kit
           - console
           - core
@@ -28,6 +29,7 @@ jobs:
           - log
           - mailer
           - messenger
+          - newrelic-bundle
           - open-api
           - process
           - profiling

@@ -1,0 +1,63 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Draw\Bundle\NewRelicBundle\DependencyInjection\Compiler;
+
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use Symfony\Component\DependencyInjection\Reference;
+
+class MonologHandlerPass implements CompilerPassInterface
+{
+    public function process(ContainerBuilder $container): void
+    {
+        if (!$container->hasParameter('draw.new_relic.monolog') || !$container->hasDefinition('monolog.logger')) {
+            return;
+        }
+
+        $configuration = $container->getParameter('draw.new_relic.monolog');
+        if ($container->hasDefinition('draw.new_relic.logs_handler') && $container->hasParameter('draw.new_relic.application_name')) {
+            $container->findDefinition('draw.new_relic.logs_handler')
+                ->setArgument('$level', \is_int($configuration['level']) ? $configuration['level'] : \constant('Monolog\Logger::'.strtoupper($configuration['level'])))
+                ->setArgument('$bubble', true)
+                ->setArgument('$appName', $container->getParameter('draw.new_relic.application_name'))
+            ;
+        }
+
+        if (!isset($configuration['channels'])) {
+            $channels = $this->getChannels($container);
+        } elseif ('inclusive' === $configuration['channels']['type']) {
+            $channels = $configuration['channels']['elements'] ?: $this->getChannels($container);
+        } else {
+            $channels = array_diff($this->getChannels($container), $configuration['channels']['elements']);
+        }
+
+        foreach ($channels as $channel) {
+            try {
+                $def = $container->getDefinition('app' === $channel ? 'monolog.logger' : 'monolog.logger.'.$channel);
+            } catch (InvalidArgumentException $e) {
+                $msg = 'NewRelicBundle configuration error: The logging channel "'.$channel.'" does not exist.';
+                throw new \InvalidArgumentException($msg, 0, $e);
+            }
+            $def->addMethodCall('pushHandler', [new Reference('draw.new_relic.logs_handler')]);
+        }
+    }
+
+    private function getChannels(ContainerBuilder $container)
+    {
+        $channels = [];
+        foreach ($container->getDefinitions() as $id => $definition) {
+            if ('monolog.logger' === $id) {
+                $channels[] = 'app';
+                continue;
+            }
+            if (str_starts_with($id, 'monolog.logger.')) {
+                $channels[] = substr($id, 15);
+            }
+        }
+
+        return $channels;
+    }
+}

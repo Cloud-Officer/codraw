@@ -1,0 +1,107 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Draw\Bundle\NewRelicBundle\Listener;
+
+use Draw\Bundle\NewRelicBundle\NewRelic\Config;
+use Draw\Bundle\NewRelicBundle\NewRelic\NewRelicInteractorInterface;
+use Draw\Bundle\NewRelicBundle\TransactionNamingStrategy\TransactionNamingStrategyInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\HttpKernel\KernelEvents;
+
+class RequestListener implements EventSubscriberInterface
+{
+    private $ignoredRoutes;
+    private $ignoredPaths;
+    private $config;
+    private $interactor;
+    private $transactionNamingStrategy;
+    private $symfonyCache;
+
+    public function __construct(
+        Config $config,
+        NewRelicInteractorInterface $interactor,
+        array $ignoreRoutes,
+        array $ignoredPaths,
+        TransactionNamingStrategyInterface $transactionNamingStrategy,
+        bool $symfonyCache = false,
+    ) {
+        $this->config = $config;
+        $this->interactor = $interactor;
+        $this->ignoredRoutes = $ignoreRoutes;
+        $this->ignoredPaths = $ignoredPaths;
+        $this->transactionNamingStrategy = $transactionNamingStrategy;
+        $this->symfonyCache = $symfonyCache;
+    }
+
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            KernelEvents::REQUEST => [
+                ['setApplicationName', 255],
+                ['setIgnoreTransaction', 31],
+                ['setTransactionName', -10],
+            ],
+        ];
+    }
+
+    public function setApplicationName(RequestEvent $event): void
+    {
+        if (!$this->isEventValid($event)) {
+            return;
+        }
+
+        $appName = $this->config->getName();
+
+        if (!$appName) {
+            return;
+        }
+
+        if ($this->symfonyCache) {
+            $this->interactor->startTransaction($appName);
+        }
+
+        // Set application name if different from ini configuration
+        if ($appName !== \ini_get('newrelic.appname')) {
+            $this->interactor->setApplicationName($appName, $this->config->getLicenseKey(), $this->config->getXmit());
+        }
+    }
+
+    public function setTransactionName(RequestEvent $event): void
+    {
+        if (!$this->isEventValid($event)) {
+            return;
+        }
+
+        $transactionName = $this->transactionNamingStrategy->getTransactionName($event->getRequest());
+
+        $this->interactor->setTransactionName($transactionName);
+    }
+
+    public function setIgnoreTransaction(RequestEvent $event): void
+    {
+        if (!$this->isEventValid($event)) {
+            return;
+        }
+
+        $request = $event->getRequest();
+        if (\in_array($request->get('_route'), $this->ignoredRoutes, true)) {
+            $this->interactor->ignoreTransaction();
+        }
+
+        if (\in_array($request->getPathInfo(), $this->ignoredPaths, true)) {
+            $this->interactor->ignoreTransaction();
+        }
+    }
+
+    /**
+     * Make sure we should consider this event. Example: make sure it is a master request.
+     */
+    private function isEventValid(RequestEvent $event): bool
+    {
+        return HttpKernelInterface::MAIN_REQUEST === $event->getRequestType();
+    }
+}
