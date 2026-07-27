@@ -1,0 +1,48 @@
+{
+    "name": "codraw/pusher-bundle",
+    "description": "Integrate the Pusher Channels API into Symfony",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "draw",
+        "bundle",
+        "symfony"
+    ],
+    "authors": [
+        {
+            "name": "Martin Poirier Theoret",
+            "email": "mpoiriert@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.5",
+        "ext-json": "*",
+        "pusher/pusher-php-server": "^7.2",
+        "symfony/config": "^7.4.0",
+        "symfony/dependency-injection": "^7.4.0",
+        "symfony/http-foundation": "^7.4.0",
+        "symfony/http-kernel": "^7.4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^12.5",
+        "symfony/framework-bundle": "^7.4.0",
+        "symfony/routing": "^7.4.0",
+        "symfony/twig-bundle": "^7.4.0",
+        "twig/twig": "^3.0"
+    },
+    "suggest": {
+        "symfony/twig-bundle": "To expose the Pusher application key to your templates"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Draw\\Bundle\\PusherBundle\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.38-dev"
+        }
+    }
+}

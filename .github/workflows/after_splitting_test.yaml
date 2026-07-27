@@ -33,6 +33,7 @@ jobs:
           - open-api
           - process
           - profiling
+          - pusher-bundle
           - security
           - sonata-import-bundle
           - sonata-integration-bundle
