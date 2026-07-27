@@ -13,8 +13,11 @@ parameters:
   	- packages/fixer/Tests/fixtures/*
   ignoreErrors:
       - '#Call to an undefined method Symfony\\Component\\HttpFoundation\\Session\\SessionInterface::getFlashBag\(\).#'
-      # The newrelic_* functions are provided by the New Relic PHP extension, which is not installed in CI.
-      - '#Function newrelic_[a-z_]+ not found.#'
+      # newrelic_notice_error() also accepts the legacy 5-argument error-handler form,
+      # which the signature PHPStan knows about does not cover.
+      -
+        message: '#Parameter \#1 \$unused_1 of function newrelic_notice_error expects string, int given.#'
+        path: packages/newrelic-bundle/NewRelic/NewRelicInteractor.php
       #- '#provideTestArgument\(\) return type has no value type specified in iterable type (iterable|array).#'
       #- '#provideTestOption\(\) return type has no value type specified in iterable type (iterable|array).#'
       #- '#getHandledMessages\(\) return type has no value type specified in iterable type (iterable|array).#'

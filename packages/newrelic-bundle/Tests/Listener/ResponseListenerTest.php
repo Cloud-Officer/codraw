@@ -9,6 +9,7 @@ use Draw\Bundle\NewRelicBundle\NewRelic\Config;
 use Draw\Bundle\NewRelicBundle\NewRelic\NewRelicInteractorInterface;
 use Draw\Bundle\NewRelicBundle\Twig\NewRelicExtension;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,11 +23,11 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
  */
 class ResponseListenerTest extends TestCase
 {
-    private NewRelicInteractorInterface $interactor;
+    private NewRelicInteractorInterface&MockObject $interactor;
 
-    private Config $newRelic;
+    private Config&MockObject $newRelic;
 
-    private NewRelicExtension $extension;
+    private NewRelicExtension&MockObject $extension;
 
     protected function setUp(): void
     {

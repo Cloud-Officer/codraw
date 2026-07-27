@@ -128,7 +128,8 @@ class DeprecationListenerTest extends TestCase
 
 class DummyHandler
 {
-    public function __invoke(): void
+    public function __invoke(int $errno, string $errstr, string $errfile, int $errline): bool
     {
+        return false;
     }
 }

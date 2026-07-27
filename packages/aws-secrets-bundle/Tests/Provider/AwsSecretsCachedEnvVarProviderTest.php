@@ -5,8 +5,8 @@ namespace Draw\Bundle\AwsSecretsBundle\Tests\Provider;
 use Draw\Bundle\AwsSecretsBundle\Provider\AwsSecretsCachedEnvVarProvider;
 use Draw\Bundle\AwsSecretsBundle\Provider\AwsSecretsEnvVarProviderInterface;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 
@@ -15,19 +15,19 @@ use Psr\Cache\CacheItemPoolInterface;
  */
 class AwsSecretsCachedEnvVarProviderTest extends TestCase
 {
-    use ProphecyTrait;
+    private AwsSecretsEnvVarProviderInterface&MockObject $decorated;
 
-    private $decorated;
-    private $provider;
-    private $cacheItemPool;
+    private CacheItemPoolInterface&MockObject $cacheItemPool;
+
+    private AwsSecretsCachedEnvVarProvider $provider;
 
     protected function setUp(): void
     {
-        $this->decorated = $this->prophesize(AwsSecretsEnvVarProviderInterface::class);
-        $this->cacheItemPool = $this->prophesize(CacheItemPoolInterface::class);
+        $this->decorated = $this->createMock(AwsSecretsEnvVarProviderInterface::class);
+        $this->cacheItemPool = $this->createMock(CacheItemPoolInterface::class);
         $this->provider = new AwsSecretsCachedEnvVarProvider(
-            $this->cacheItemPool->reveal(),
-            $this->decorated->reveal(),
+            $this->cacheItemPool,
+            $this->decorated,
             60
         );
     }
@@ -35,12 +35,16 @@ class AwsSecretsCachedEnvVarProviderTest extends TestCase
     #[Test]
     public function itReturnsCachedItemIfHit(): void
     {
-        $cacheItem = $this->prophesize(CacheItemInterface::class);
-        $cacheItem->isHit()->willReturn(true);
-        $cacheItem->get()->willReturn('value');
-        $this->cacheItemPool->getItem(AwsSecretsCachedEnvVarProvider::CACHE_KEY_PREFIX.'.'.md5('key'))
+        $cacheItem = $this->createMock(CacheItemInterface::class);
+        $cacheItem->expects($this->once())->method('isHit')->willReturn(true);
+        $cacheItem->expects($this->once())->method('get')->willReturn('value');
+
+        $this->cacheItemPool->expects($this->once())
+            ->method('getItem')
+            ->with(AwsSecretsCachedEnvVarProvider::CACHE_KEY_PREFIX.'.'.md5('key'))
             ->willReturn($cacheItem)
         ;
+        $this->decorated->expects($this->never())->method('get');
 
         $result = $this->provider->get('key');
 
@@ -50,17 +54,21 @@ class AwsSecretsCachedEnvVarProviderTest extends TestCase
     #[Test]
     public function itSetsCacheItemAndReturnsDecoratedValueOnNoHit(): void
     {
-        $cacheItem = $this->prophesize(CacheItemInterface::class);
-        $cacheItem->isHit()->shouldBeCalled()->willReturn(false);
-        $cacheItem->set('value')->shouldBeCalled()->willReturn($cacheItem);
-        $cacheItem->expiresAfter(60)->shouldBeCalled()->willReturn($cacheItem);
-        $this->cacheItemPool->save($cacheItem->reveal())->shouldBeCalled();
-        $this->cacheItemPool->getItem(AwsSecretsCachedEnvVarProvider::CACHE_KEY_PREFIX.'.'.md5('key'))
+        $cacheItem = $this->createMock(CacheItemInterface::class);
+        $cacheItem->expects($this->once())->method('isHit')->willReturn(false);
+        $cacheItem->expects($this->once())->method('set')->with('value')->willReturnSelf();
+        $cacheItem->expects($this->once())->method('expiresAfter')->with(60)->willReturnSelf();
+
+        $this->cacheItemPool->expects($this->once())
+            ->method('getItem')
+            ->with(AwsSecretsCachedEnvVarProvider::CACHE_KEY_PREFIX.'.'.md5('key'))
             ->willReturn($cacheItem)
         ;
-        $this->decorated->get('key')->willReturn('value');
+        $this->cacheItemPool->expects($this->once())->method('save')->with($cacheItem)->willReturn(true);
+        $this->decorated->expects($this->once())->method('get')->with('key')->willReturn('value');
 
         $result = $this->provider->get('key');
+
         static::assertSame('value', $result);
     }
 }

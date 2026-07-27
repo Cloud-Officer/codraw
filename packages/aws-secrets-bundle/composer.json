@@ -25,7 +25,6 @@
     },
     "require-dev": {
         "aws/aws-sdk-php": "^3.171",
-        "phpspec/prophecy-phpunit": "^2.5",
         "phpunit/phpunit": "^12.5",
         "symfony/framework-bundle": "^7.4.0"
     },

@@ -57,9 +57,9 @@ class LoggingInteractorDecoratorTest extends TestCase
         }
     }
 
-    private static function getTypeStub(?\ReflectionType $type)
+    protected static function getTypeStub(?\ReflectionType $type)
     {
-        if (null === $type) {
+        if (!$type instanceof \ReflectionNamedType) {
             return uniqid('', true);
         }
 
