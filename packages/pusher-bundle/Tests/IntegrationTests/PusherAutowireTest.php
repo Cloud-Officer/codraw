@@ -26,7 +26,11 @@ final class PusherAutowireTest extends TestCase
         $service = $container->get(PusherAutowireClass::class);
 
         self::assertInstanceOf(PusherAutowireClass::class, $service);
-        self::assertInstanceOf(Pusher::class, $service->getPusher());
+
+        $settings = $service->getPusher()->getSettings();
+        self::assertSame('fake_key', $settings['auth_key']);
+        self::assertSame('fake_secret', $settings['secret']);
+        self::assertSame('fake_id', $settings['app_id']);
 
         $kernel->shutdown();
         restore_exception_handler();
