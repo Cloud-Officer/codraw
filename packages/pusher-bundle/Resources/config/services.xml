@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="draw.pusher.pusher_configuration" class="Draw\Bundle\PusherBundle\PusherConfiguration">
+            <argument/> <!-- bundle configuration array -->
+        </service>
+
+        <service id="Draw\Bundle\PusherBundle\Controller\AuthController">
+            <argument type="service" id="draw.pusher.pusher_configuration"/>
+            <argument/> <!-- Channel authenticator service implemented by user-->
+            <tag name="controller.service_arguments"/>
+        </service>
+
+        <service id="draw.pusher.pusher" class="Pusher\Pusher" public="false">
+            <factory class="Draw\Bundle\PusherBundle\PusherFactory" method="create"/>
+            <argument type="service" id="draw.pusher.pusher_configuration"/> <!-- bundle configuration array -->
+        </service>
+
+    </services>
+</container>

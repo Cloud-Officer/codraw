@@ -32,6 +32,7 @@ jobs:
           - open-api
           - process
           - profiling
+          - pusher-bundle
           - security
           - sonata-extra-bundle
           - sonata-import-bundle
